@@ -120,7 +120,7 @@ const Navigation = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     return (
         <>
-            <AppBar style={{ background: 'white', height: '70px', width: '100%' }} position='static'>
+            <AppBar style={{ background: 'white', height: '70px', width: '100%' }} position='sticky'>
                 <CssBaseline>
                     <Toolbar>
                         <Link to='/' className={classes.logo}>
@@ -148,10 +148,10 @@ const Navigation = () => {
                                     <NavLink to='/about' style={{ textDecoration: 'none' }} className={classes.link}>
                                         ABOUT
                                     </NavLink>
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    <NavLink to='/jobs' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         JOBS
                                     </NavLink>
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    <NavLink to='/news' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         NEWS
                                     </NavLink>
                                     <NavLink to='/contact' style={{ textDecoration: 'none' }} className={classes.link4}>

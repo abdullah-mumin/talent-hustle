@@ -16,10 +16,10 @@ const ContactUs = () => {
                         </Grid>
                         <Grid marginTop='-300px'>
                             <Typography sx={{ fontSize: '30px', color: 'black', fontWeight: '600', textAlign: 'center', letterSpacing: '5px' }}>
-                                About Us
+                                Contact Us
                             </Typography>
                             <Typography sx={{ fontSize: '15px', color: 'black', fontWeight: '600', textAlign: 'center' }}>
-                                We are here for any information check this out
+                                Feel free any queries contact with us
                             </Typography>
                         </Grid>
                     </Grid>
