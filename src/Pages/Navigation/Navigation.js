@@ -6,6 +6,7 @@ import NavDrawer from '../Navigation/Drawer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../Images/home/logo.jpg'
 
 const useStyles = makeStyles((theme) => ({
     navlinks: {
@@ -124,8 +125,7 @@ const Navigation = () => {
                 <CssBaseline>
                     <Toolbar>
                         <Link to='/' className={classes.logo}>
-                            Job Hunt
-                            {/* <img style={{ width: '190px', height: '50px', marginLeft: '20px' }} src={logo} alt="Trektil" /> */}
+                            <img style={{ width: '100px', height: '50px', marginLeft: '20px' }} src={logo} alt="Trektil" />
                         </Link>
 
                         {isMobile ? (
@@ -142,7 +142,7 @@ const Navigation = () => {
                                     {/* <NavLink to='/tour-plan' style={{ textDecoration: 'none' }} className={classes.link1}>
                                                     {t('nOption1')}
                                                 </NavLink> */}
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link}>
+                                    <NavLink to='/profile' style={{ textDecoration: 'none' }} className={classes.link}>
                                         HOME
                                     </NavLink>
                                     <NavLink to='/about' style={{ textDecoration: 'none' }} className={classes.link}>
@@ -160,10 +160,10 @@ const Navigation = () => {
                                 </Grid>
                                 <Grid item md={6} display='flex' justifyContent='flex-end'
                                     marginTop='10px'>
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link5}>
+                                    <NavLink to='/login' style={{ textDecoration: 'none' }} className={classes.link5}>
                                         Login
                                     </NavLink>
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link7}>
+                                    <NavLink to='/register' style={{ textDecoration: 'none' }} className={classes.link5}>
                                         Register
                                     </NavLink>
                                     {/* <Grid
