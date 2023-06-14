@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# jon-hunt
+# Talent-Hustle
 =======
 # Getting Started with Create React App
 
