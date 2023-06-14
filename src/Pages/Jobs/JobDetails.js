@@ -11,6 +11,7 @@ import { BiTimeFive } from 'react-icons/bi';
 import { AiFillUnlock } from 'react-icons/ai';
 import location from '../../Images/Job/location.jpg';
 import Modal from '@mui/material/Modal';
+import FileBase64 from 'react-file-base64';
 
 const style = {
     position: 'absolute',
@@ -35,12 +36,15 @@ const JobDetails = () => {
     };
 
     const [url, setUrl] = React.useState('');
+    const [item, setItem] = useState({ image: '' });
 
     // Handle the `onChange` event of the `file` input
     const onChange = (e) => {
         const files = e.target.files;
         files.length > 0 && setUrl(URL.createObjectURL(files[0]));
+        console.log(files);
     };
+    console.log(item);
 
     return (
         <>
@@ -335,6 +339,21 @@ const JobDetails = () => {
                     </Container>
                 </Grid>
             </Grid>
+            {/* <Grid>
+                {
+                    item !== null ?
+                        <>
+                            {
+                                item.map(info => <Grid>
+                                    <img style={{ width: '100%', height: 100 }} src={info.image} />
+                                </Grid>)
+                            }
+                        </>
+                        :
+                        <>
+                        </>
+                }
+            </Grid> */}
             <Footer />
             <Modal
                 open={open}
@@ -413,7 +432,7 @@ const JobDetails = () => {
                                 Upload CV
                             </Typography>
                             <Grid sx={{ marginTop: '5px' }}>
-                                <input type="file" accept=".pdf" onChange={onChange} />
+                                <FileBase64 multiple={false} type="file" onDone={({ base64 }) => setItem({ ...item, image: base64 })} />
                             </Grid>
                         </Grid>
                         <Grid sx={{ marginTop: '10px' }}>

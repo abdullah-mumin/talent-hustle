@@ -123,7 +123,7 @@ const Profile = () => {
                                             </Grid>
                                             <Grid>
                                                 <Typography sx={{ fontSize: '13px', marginTop: '15px' }}>
-                                                    First Name
+                                                    Full Name
                                                 </Typography>
                                                 <TextField
                                                     id="outlined-basic"
@@ -132,21 +132,7 @@ const Profile = () => {
                                                     // placeholder='Full Name'
                                                     type='text'
                                                     size='small'
-                                                    name='firstName'
-                                                />
-                                            </Grid>
-                                            <Grid>
-                                                <Typography sx={{ fontSize: '13px', marginTop: '15px' }}>
-                                                    Last Name
-                                                </Typography>
-                                                <TextField
-                                                    id="outlined-basic"
-                                                    sx={{ width: '70%', }}
-                                                    variant="outlined"
-                                                    // placeholder='Full Name'
-                                                    type='text'
-                                                    size='small'
-                                                    name='lastName'
+                                                    name='fullName'
                                                 />
                                             </Grid>
                                             <Grid>

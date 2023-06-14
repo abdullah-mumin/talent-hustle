@@ -15,8 +15,32 @@ const Register = () => {
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+
+        console.log(data);
+        if (data.password !== data.password2) {
+            return
+        }
+        const info = {
+            'name': data.fullName,
+            'email': data.email,
+            'password': data.password,
+            'isCandidate': flag
+        }
+        try {
+            const response = await fetch(`http://localhost:5000/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(info),
+            });
+
+            const result = await response.json();
+            console.log("Success:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
 
@@ -132,7 +156,7 @@ const Register = () => {
                                                         sx={{ width: '50%', textAlign: 'center', marginTop: '20px', backgroundColor: '#291F78', paddingTop: '10px', paddingBottom: '10px', marginRight: '10px', marginLeft: '10px' }}
                                                         variant="contained"
                                                         type="submit" >
-                                                        Login
+                                                        Register
                                                     </Button>
                                                 </form>
                                             </Grid>
