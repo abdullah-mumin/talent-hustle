@@ -1,5 +1,5 @@
 import { Avatar, Container, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import about from '../../Images/About/about.png';
@@ -34,6 +34,18 @@ const News = () => {
     const handleChange = (event) => {
         setShowClearIcon(event.target.value === "" ? "none" : "flex");
     };
+
+    // const [data, setData] = useState([]);
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/job`, {
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setData(data);
+    //         })
+    // }, []);
+
+    // console.log(data);
 
 
     return (

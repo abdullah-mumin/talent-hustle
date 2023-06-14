@@ -1,8 +1,23 @@
-import { Container, Grid, InputAdornment, TextField } from '@mui/material';
-import React from 'react';
+import { Button, Container, Grid, InputAdornment, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import HouseIcon from '@mui/icons-material/House';
 
 const SearchArea = () => {
+
+    const [title, setTitle] = useState('');
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const [location, setLocation] = useState('');
+    const handleLocationChange = (e) => {
+        setLocation(e.target.value);
+    };
+
+    const handleSearch = () => {
+        console.log(title);
+        console.log(location);
+    };
     return (
         <Grid>
             <Container>
@@ -28,11 +43,9 @@ const SearchArea = () => {
                                     placeholder="Job Title"
                                     // size='small'
                                     id="outlined-select-city"
-                                    // select
-                                    // value={value}
-                                    name='city'
-                                // onChange={handleChange}
-                                // onBlur={handleOnBlur}
+                                    value={title}
+                                    name='title'
+                                    onChange={handleTitleChange}
                                 >
                                 </TextField>
                             </Grid>
@@ -50,15 +63,25 @@ const SearchArea = () => {
                                     placeholder="Location"
                                     // size='small'
                                     id="outlined-select-city"
-                                    // select
-                                    // value={value}
-                                    name='city'
-                                // onChange={handleChange}
-                                // onBlur={handleOnBlur}
+                                    value={location}
+                                    name='location'
+                                    onChange={handleLocationChange}
                                 >
                                 </TextField>
                             </Grid>
-                            <Grid item md={2}></Grid>
+                            <Grid item md={2}>
+                                <Button
+                                    onClick={handleSearch}
+                                    sx={{
+                                        backgroundColor: '#291F78', textTransform: 'none', width: '100%', padding: '12px 20px', borderRadius: '10px', '&:hover': {
+                                            bgcolor: '#291F78',
+                                        },
+                                    }}
+                                    variant="contained"
+                                >
+                                    Search
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import login from '../../Images/Login/login.png';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [flag, setFlag] = useState('');
 
     const handleButtonClick = (id) => {
@@ -15,8 +17,29 @@ const Login = () => {
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        const info = {
+            'email': data.email,
+            'password': data.password,
+            'isCandidate': flag
+        }
+        try {
+            const response = await fetch(`http://localhost:5000/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(info),
+            });
+
+            const result = await response.json();
+            console.log(result.message);
+            if (result.message == 'Login Successful') {
+                navigate(`/home`);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
 
