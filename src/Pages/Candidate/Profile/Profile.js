@@ -2,15 +2,17 @@ import { Avatar, Badge, Button, Container, Grid, TextField, Typography } from '@
 import React, { useState } from 'react';
 import Navigation from '../../Navigation/Navigation';
 import Footer from '../../Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import adobe from '../../../Images/News/adobe.png';
 import adm from '../../../Images/News/adm.png';
 import stripe from '../../../Images/News/stripe.png';
 import amd from '../../../Images/News/amd.png';
 import { TbArrowBigRightFilled } from 'react-icons/tb';
 import { IconButton, styled } from '@material-ui/core';
+import FileBase64 from 'react-file-base64';
 import EditIcon from "@mui/icons-material/Edit";
 import PersonIcon from '@mui/icons-material/Person';
+import './Profile.css';
 
 const Input = styled("input")({
     display: "none"
@@ -23,21 +25,57 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
     backgroundColor: '#2B6687'
 }));
 
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result)
+        };
+        fileReader.onerror = (error) => {
+            reject(error)
+        }
+    })
+}
+
+
 const Profile = () => {
+    const navigate = useNavigate();
+    const [name, setName] = useState('');
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
+    const [number, setNumber] = useState('');
+    const handleNumberChange = (e) => {
+        setNumber(e.target.value);
+    };
+    const [email, setEmail] = useState('');
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+    const [address, setAddress] = useState('');
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value);
+    };
+
+
     const imagetypes = ['image/*'];
-    const [image, setImage] = useState();
+    const [image, setImage] = useState('');
     const [preview, setPreview] = useState(null);
+    const [item, setItem] = useState({ image: '' });
     const [previewError, setPreviewError] = useState(null);
     const handleImageUpdate = (e) => {
         const selectFile = e.target.files[0];
+        const image = convertToBase64(selectFile);
+        setImage(image);
+        // console.log(convertToBase64(selectFile));
         if (selectFile) {
             if (selectFile && selectFile.type.substr(0, 5) === 'image') {
-                setImage(imagetypes);
                 setPreview(URL.createObjectURL(selectFile));
                 setPreviewError('')
             }
             else {
-                setImage(null);
+                // setImage(null);
                 setPreview(null);
                 setPreviewError('Please select valid image');
             }
@@ -45,7 +83,40 @@ const Profile = () => {
         else {
             setPreviewError('Select your file');
         }
-    }
+    };
+    // console.log(item);
+
+
+    const handleProfileUpdate = async (e) => {
+        e.preventDefault();
+        const info = {
+            'name': name,
+            'email': email,
+            'number': number,
+            'address': address,
+            'image': image
+        }
+        try {
+            const response = await fetch(`http://localhost:5000/profile`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(info),
+            });
+
+            const result = await response.json();
+            if (result) {
+                // setLoading(false);
+                navigate(`/profile`);
+            }
+            console.log("Success:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+
     return (
         <>
             <Navigation />
@@ -75,9 +146,12 @@ const Profile = () => {
                                                     badgeContent={
                                                         <>
                                                             <label htmlFor="icon-button-file">
-                                                                <Input
-                                                                    onChange={handleImageUpdate}
-                                                                    accept="image/*" id="icon-button-file" type="file" />
+                                                                <Grid className="input-file">
+                                                                    <Input
+                                                                        onChange={handleImageUpdate}
+                                                                        accept="image/*" id="icon-button-file" type="file" name="image" />
+                                                                    {/* <FileBase64 multiple={false} type="file" accept="image/*" onDone={({ base64 }) => setItem({ ...item, image: base64 })} /> */}
+                                                                </Grid>
                                                                 <IconButton
                                                                     color="primary"
                                                                     aria-label="upload picture"
@@ -130,6 +204,8 @@ const Profile = () => {
                                                     sx={{ width: '70%', }}
                                                     variant="outlined"
                                                     // placeholder='Full Name'
+                                                    value={name}
+                                                    onChange={handleNameChange}
                                                     type='text'
                                                     size='small'
                                                     name='fullName'
@@ -144,6 +220,8 @@ const Profile = () => {
                                                     sx={{ width: '70%', }}
                                                     variant="outlined"
                                                     // placeholder='Full Name'
+                                                    value={number}
+                                                    onChange={handleNumberChange}
                                                     type='text'
                                                     size='small'
                                                     name='phone'
@@ -158,6 +236,8 @@ const Profile = () => {
                                                     sx={{ width: '70%', }}
                                                     variant="outlined"
                                                     // placeholder='Full Name'
+                                                    value={email}
+                                                    onChange={handleEmailChange}
                                                     type='email'
                                                     size='small'
                                                     name='email'
@@ -165,31 +245,23 @@ const Profile = () => {
                                             </Grid>
                                             <Grid>
                                                 <Typography sx={{ fontSize: '13px', marginTop: '15px' }}>
-                                                    Cover Letter
+                                                    Address
                                                 </Typography>
                                                 <TextField
                                                     id="outlined-basic"
                                                     sx={{ width: '70%', }}
                                                     variant="outlined"
                                                     // placeholder='Full Name'
-                                                    multiline
-                                                    rows={4}
+                                                    value={address}
+                                                    onChange={handleAddressChange}
                                                     type='email'
                                                     size='small'
                                                     name='email'
                                                 />
                                             </Grid>
                                             <Grid>
-                                                <Typography sx={{ fontSize: '13px', marginTop: '15px', marginBottom: '10px' }}>
-                                                    Upload CV
-                                                </Typography>
-                                                <input
-                                                    type="file"
-                                                    accept='.pdf'
-                                                />
-                                            </Grid>
-                                            <Grid>
                                                 <Button
+                                                    onClick={handleProfileUpdate}
                                                     sx={{ marginTop: '30px', backgroundColor: '#291F78', textTransform: 'none' }}
                                                     variant="contained"
                                                 >
