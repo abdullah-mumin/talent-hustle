@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import login from '../../Images/Login/login.png';
+import Loader from '../../Component/Loader/Loader';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [flag, setFlag] = useState('');
 
     const handleButtonClick = (id) => {
@@ -22,8 +24,9 @@ const Login = () => {
             'email': data.email,
             'password': data.password,
             'isCandidate': flag
-        }
+        };
         try {
+            setLoading(true);
             const response = await fetch(`http://localhost:5000/login`, {
                 method: "POST",
                 headers: {
@@ -33,8 +36,11 @@ const Login = () => {
             });
 
             const result = await response.json();
-            console.log(result.message);
-            if (result.message == 'Login Successful') {
+            setLoading(true);
+            // console.log(result.message);
+            if (result.message === 'Login Successful') {
+                localStorage.setItem('userData', JSON.stringify(result.data));
+                setLoading(false);
                 navigate(`/home`);
             }
         } catch (error) {
@@ -71,6 +77,9 @@ const Login = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
+                                {
+                                    loading && <Loader />
+                                }
                                 <Grid item md={7.5}>
                                     <Grid sx={{ padding: '71px 20px', borderRadius: '0px 10px 10px 0px', boxShadow: '2', backgroundImage: 'linear-gradient(to right, #FFFFFF, #7697EB)' }}>
                                         <Grid sx={{ textAlign: 'center' }}>
