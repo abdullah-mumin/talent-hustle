@@ -78,7 +78,7 @@ const JobDetails = () => {
     const [jobInfo, setJobInfo] = useState([]);
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/search/${id}`, {
+        fetch(`https://talent-hustle-server.vercel.app/search/${id}`, {
         })
             .then(res => res.json())
             .then(data => {
@@ -105,7 +105,7 @@ const JobDetails = () => {
         const info = {
             'name': name,
             'email': email,
-            'companyEmail': jobInfo.companyName,
+            'companyEmail': jobInfo.email,
             'number': number,
             'letter': letter,
             'experience': experience,
@@ -113,7 +113,7 @@ const JobDetails = () => {
         }
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/apply`, {
+            const response = await fetch(`https://talent-hustle-server.vercel.app/apply`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

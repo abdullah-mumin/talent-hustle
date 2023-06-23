@@ -107,7 +107,7 @@ const Navigation = () => {
 
     const logoutUser = () => {
         setLoading(true);
-        localStorage.removeItem('userData');
+        localStorage.removeItem('userInfo');
         setLoading(false);
     };
 
@@ -121,7 +121,7 @@ const Navigation = () => {
     useEffect(() => {
         let interval = setInterval(() => {
             if (userData) {
-                const updateInfo = JSON.parse(localStorage.getItem('userData'));
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
                 setUserData(updateInfo || []);
             }
         }, 200)
@@ -133,6 +133,9 @@ const Navigation = () => {
     //Profile
     const handleProfile = () => {
         navigate('/profile');
+    };
+    const handleDashboard = () => {
+        navigate('/company-dashboard');
     };
 
 
@@ -355,7 +358,7 @@ const Navigation = () => {
                                                                 anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
                                                             >
                                                                 <MenuItem
-                                                                    // onClick={handleProfile}
+                                                                    onClick={handleDashboard}
                                                                     sx={{
                                                                         '&.hover': {
                                                                             backgroundColor: 'red'

@@ -40,7 +40,7 @@ const Jobs = () => {
     const [jobInfo, setJobInfo] = useState([]);
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/search/${location.state.title}&${location.state.locationInfo}`, {
+        fetch(`https://talent-hustle-server.vercel.app/search/${location.state.title}&${location.state.locationInfo}`, {
         })
             .then(res => res.json())
             .then(data => {

@@ -27,7 +27,7 @@ const Login = () => {
         };
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/login`, {
+            const response = await fetch(`https://talent-hustle-server.vercel.app/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const Login = () => {
             setLoading(true);
             // console.log(result.message);
             if (result.message === 'Login Successful') {
-                localStorage.setItem('userData', JSON.stringify(result.data));
+                localStorage.setItem('userInfo', JSON.stringify(result.data));
                 setLoading(false);
                 navigate(`/home`);
             }
