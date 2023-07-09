@@ -1,5 +1,5 @@
 import { Button, FormControl, Grid, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import Message from '../../../Component/Message/Message';
 import Loader from '../../../Component/Loader/Loader';
@@ -121,11 +121,23 @@ const ManageJobsPost = () => {
         // message.message === 'Successfully Applied' ? navigate(`/`) : navigate(`/job-details/${id}`);
     };
 
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, []);
+
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const hanldeJobPost = async (e) => {
         const info = {
             'companyName': companyName,
+            'companyEmail' : userData?.email,
             'title': companyTitle,
             'email': companyEmail,
             'number': companyNumber,

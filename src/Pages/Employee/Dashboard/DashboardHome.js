@@ -1,5 +1,5 @@
 import { Avatar, Container, Grid, Paper, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BiHomeAlt } from 'react-icons/bi';
 import { TfiBag } from 'react-icons/tfi';
 import { TbActivityHeartbeat } from 'react-icons/tb';
@@ -32,6 +32,18 @@ const chartData = [
 
 const DashboardHome = () => {
     // console.log(chartData)
+    const [loading, setLoading] = useState(false);
+    const [applyInfo, setApplyInfo] = useState([]);
+    useEffect(() => {
+        setLoading(true);
+        fetch(`https://talent-hustle-server.vercel.app/apply`, {
+        })
+            .then(res => res.json())
+            .then(data => {
+                setApplyInfo(data);
+                setLoading(false);
+            })
+    }, []);
 
     return (
         <Grid>
@@ -65,7 +77,7 @@ const DashboardHome = () => {
                             </Grid>
                             <Grid>
                                 <Typography sx={{ fontSize: '20px' }}>
-                                    166
+                                    {applyInfo?.length}
                                 </Typography>
                             </Grid>
                             <Grid>

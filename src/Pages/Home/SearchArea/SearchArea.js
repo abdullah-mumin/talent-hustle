@@ -33,7 +33,7 @@ const SearchArea = () => {
         //     'location': location,
         // }
         // try {
-        //     const response = await fetch(`http://localhost:5000/search`, {
+        //     const response = await fetch(`https://talent-hustle-server.vercel.app/search`, {
         //         method: "POST",
         //         headers: {
         //             "Content-Type": "application/json",

@@ -38,6 +38,16 @@ const Jobs = () => {
 
     const [loading, setLoading] = useState(false);
     const [jobInfo, setJobInfo] = useState([]);
+    // useEffect(() => {
+    //     setLoading(true);
+    //     fetch(`https://talent-hustle-server.vercel.app/search/?title=${location.state.title}&location=${location.state.locationInfo}`, {
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setJobInfo(data);
+    //             setLoading(false);
+    //         })
+    // }, []);
     useEffect(() => {
         setLoading(true);
         fetch(`https://talent-hustle-server.vercel.app/search/${location.state.title}&${location.state.locationInfo}`, {

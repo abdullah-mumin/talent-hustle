@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import login from '../../Images/Login/login.png';
 import Loader from '../../Component/Loader/Loader';
+import Message from '../../Component/Message/Message';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,6 +17,18 @@ const Login = () => {
     const handleButtonClick = (id) => {
         setFlag(id);
         // console.log(id);
+    };
+
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+        navigate(`/home`);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+        setTimeout(() => handleClose(), 3000);
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -40,8 +53,20 @@ const Login = () => {
             // console.log(result.message);
             if (result.message === 'Login Successful') {
                 localStorage.setItem('userInfo', JSON.stringify(result.data));
+                const addonMessage = {
+                    message: 'Successfully Login'
+                };
+                setMessage(addonMessage);
+                handleOpen();
                 setLoading(false);
-                navigate(`/home`);
+            }
+            else if (result.message === 'Login Failed') {
+                const addonMessage = {
+                    message: 'Login Failed!!! Try Again...'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
             }
         } catch (error) {
             console.error("Error:", error);
@@ -163,6 +188,9 @@ const Login = () => {
                 </Grid >
             </Grid >
             <Footer />
+            {
+                open && <Message open={open} onclose={handleClose} message={message} />
+            }
         </>
     );
 };

@@ -87,6 +87,18 @@ const JobDetails = () => {
             })
     }, []);
     // console.log(jobInfo);
+    
+
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, []);
 
     const [url, setUrl] = React.useState('');
     const [item, setItem] = useState({ cv: '' });
@@ -104,8 +116,10 @@ const JobDetails = () => {
         onCloseModal();
         const info = {
             'name': name,
-            'email': email,
-            'companyEmail': jobInfo.email,
+            'email': userData?.email,
+            'title' : jobInfo?.title,
+            'cvEmail' : email,
+            'companyEmail': jobInfo.companyEmail,
             'number': number,
             'letter': letter,
             'experience': experience,

@@ -1,5 +1,5 @@
 import { Avatar, Badge, Button, Container, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../../Navigation/Navigation';
 import Footer from '../../Footer/Footer';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,6 +13,8 @@ import FileBase64 from 'react-file-base64';
 import EditIcon from "@mui/icons-material/Edit";
 import PersonIcon from '@mui/icons-material/Person';
 import './Profile.css';
+import Message from '../../../Component/Message/Message';
+import Loader from '../../../Component/Loader/Loader';
 
 const Input = styled("input")({
     display: "none"
@@ -86,6 +88,45 @@ const Profile = () => {
     };
     // console.log(item);
 
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, []);
+
+    const [loading, setLoading] = useState(false);
+    const [meetingInfo, setMeetingInfo] = useState([]);
+    useEffect(() => {
+        // setLoading(true);
+        if (userData?.email) {
+            fetch(`https://talent-hustle-server.vercel.app/meeting/${userData?.email}`, {
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setMeetingInfo(data);
+                    // setLoading(false);
+                })
+        }
+    }, [meetingInfo, userData?.email]);
+    // console.log(meetingInfo)
+
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+        navigate(`/profile`);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+        setTimeout(() => handleClose(), 3000);
+    };
+
 
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
@@ -97,6 +138,7 @@ const Profile = () => {
             'image': image
         }
         try {
+            setLoading(true);
             const response = await fetch(`https://talent-hustle-server.vercel.app/profile`, {
                 method: "POST",
                 headers: {
@@ -106,16 +148,78 @@ const Profile = () => {
             });
 
             const result = await response.json();
-            if (result) {
-                // setLoading(false);
-                navigate(`/profile`);
+            setLoading(true);
+            if (result.message === 'Successful') {
+                // localStorage.setItem('userInfo', JSON.stringify(result.data));
+                const addonMessage = {
+                    message: 'Successfully Update Profile Details.'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
             }
-            console.log("Success:", result);
+            else if (result.message === 'Failed') {
+                const addonMessage = {
+                    message: 'Failed to upload profile!!! Try Again...'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
+            }
+            // if (result) {
+            //     // setLoading(false);
+            //     navigate(`/profile`);
+            // }
+            // console.log("Success:", result);
         } catch (error) {
             console.error("Error:", error);
         }
     };
 
+    const [newsEmail, setNewsEmail] = useState('');
+    const newsEmailChange = (e) => {
+        setNewsEmail(e.target.value);
+    }
+
+    const hanldeNews = async (e) => {
+        // onCloseModal();
+        // console.log(data);
+        const info = {
+            'email': newsEmail,
+        }
+        try {
+            setLoading(true);
+            const response = await fetch(`https://talent-hustle-server.vercel.app/news`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(info),
+            });
+            const result = await response.json();
+            setLoading(false);
+            if (result.message === 'Successful') {
+                setNewsEmail('');
+                const addonMessage = {
+                    message: 'Successfully Submit Email.'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
+            }
+            else if (result.message === 'Failed') {
+                setNewsEmail('');
+                const addonMessage = {
+                    message: 'Failed to submit email!!! Try Again...'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     return (
         <>
@@ -128,7 +232,7 @@ const Profile = () => {
                                 container
                                 spacing={4}
                             >
-                                <Grid item md={6}>
+                                <Grid item md={5}>
                                     <Grid sx={{ borderRadius: '10px', boxShadow: '4' }}>
                                         <Grid sx={{ backgroundColor: '#B0AADC', borderRadius: '10px' }}>
                                             <Typography sx={{ fontSize: '17px', fontWeight: '600', padding: '10px 20px' }}>
@@ -270,6 +374,34 @@ const Profile = () => {
                                             </Grid>
                                         </Grid>
                                     </Grid>
+                                </Grid>
+                                <Grid item md={3}>
+                                    <Grid sx={{ backgroundColor: '#B0AADC', borderRadius: '10px', marginBottom: '20px' }}>
+                                        <Typography sx={{ fontSize: '17px', fontWeight: '600', padding: '10px 20px' }}>
+                                            Join Meeting
+                                        </Typography>
+                                    </Grid>
+                                    {
+                                        meetingInfo.map((info) => <Grid key={info?._id}>
+                                            <Grid sx={{ marginBottom: '10px' }}>
+                                                <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                                    Your Job Title : {info?.title}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid sx={{ marginBottom: '10px' }}>
+                                                <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                                    Your Room ID : {info?.roomId}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid>
+                                                <Button variant='contained' component="label">
+                                                    <a href={info?.meeting} style={{ textDecoration: 'none', }} target="_blank" download rel="noreferrer">
+                                                        Join Meeting
+                                                    </a>
+                                                </Button>
+                                            </Grid>
+                                        </Grid>)
+                                    }
                                 </Grid>
                                 <Grid item md={4}>
                                     <Grid>
@@ -450,13 +582,13 @@ const Profile = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item md={2}>
-
-                                </Grid>
                             </Grid>
                         </Grid>
                     </Container>
                 </Grid>
+                {
+                    loading && <Loader />
+                }
                 <Grid>
                     <Container>
                         <Grid sx={{ marginTop: '100px', marginBottom: '50px' }}>
@@ -488,18 +620,22 @@ const Profile = () => {
                                                             borderRadius: '10px',
                                                         },
                                                     }}
+                                                    value={newsEmail}
+                                                    onChange={newsEmailChange}
                                                     placeholder='Email'
                                                     variant="outlined"
                                                     size='small'
                                                 />
                                             </Grid>
                                             <Grid item md={6}>
-                                                <Button variant='contained' style={{
-                                                    color: 'white', fontSize: '17px', borderRadius: '15px', backgroundColor: '#291F78', width: '100%', ':hover': {
-                                                        bgcolor: '#291F78',
-                                                        color: 'white',
-                                                    }
-                                                }}>
+                                                <Button variant='contained'
+                                                    onClick={hanldeNews}
+                                                    style={{
+                                                        color: 'white', fontSize: '17px', borderRadius: '15px', backgroundColor: '#291F78', width: '100%', ':hover': {
+                                                            bgcolor: '#291F78',
+                                                            color: 'white',
+                                                        }
+                                                    }}>
                                                     Submit
                                                 </Button>
                                             </Grid>
@@ -512,6 +648,9 @@ const Profile = () => {
                 </Grid>
             </Grid>
             <Footer />
+            {
+                open && <Message open={open} onclose={handleClose} message={message} />
+            }
         </>
     );
 };

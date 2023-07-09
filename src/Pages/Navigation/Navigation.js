@@ -6,10 +6,11 @@ import NavDrawer from '../Navigation/Drawer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../Images/home/logo.jpg'
+import logo from '../../Images/home/logo.png'
 import Person from "@mui/icons-material/Person";
 import Logout from "@mui/icons-material/Logout";
 import Loader from '../../Component/Loader/Loader';
+import Message from '../../Component/Message/Message';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         flexGrow: '1',
-        marginTop: '8px'
+        marginTop: '-5px'
     },
     link: {
         textDecoration: 'none',
@@ -105,6 +106,18 @@ const Navigation = () => {
         setAnchorEl(null);
     };
 
+    const [message, setMessage] = useState('');
+    const [messageOpen, setMessageOpen] = useState(false);
+    const handleMessageClose = () => {
+        setMessageOpen(false);
+        navigate(`/profile`);
+    };
+
+    const handleMessageOpen = () => {
+        setMessageOpen(true);
+        setTimeout(() => handleMessageClose(), 3000);
+    };
+
     const logoutUser = () => {
         setLoading(true);
         localStorage.removeItem('userInfo');
@@ -147,7 +160,7 @@ const Navigation = () => {
                 <CssBaseline>
                     <Toolbar>
                         <Link to='/' className={classes.logo}>
-                            <img style={{ width: '100px', height: '50px', marginLeft: '20px' }} src={logo} alt="Trektil" />
+                            <img style={{ width: '100px', height: '80px', marginLeft: '20px' }} src={logo} alt="Trektil" />
                         </Link>
 
                         {isMobile ? (
@@ -417,6 +430,9 @@ const Navigation = () => {
                     </Toolbar>
                 </CssBaseline>
             </AppBar>
+            {
+                messageOpen && <Message open={messageOpen} onclose={handleMessageClose} message={message} />
+            }
         </>
     );
 };
