@@ -26,51 +26,55 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         marginTop: '-5px',
         color: 'black',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link1: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '-5px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link4: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '-5px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link5: {
         textDecoration: 'none',
-        marginTop: '10px',
+        marginTop: '-5px',
         color: 'black',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+        fontSize: '25px',
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link7: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '10px',
-        fontWeight: 700,
+        fontWeight: 600,
         paddingRight: '20px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
@@ -79,9 +83,9 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'black',
         marginTop: '10px',
-        fontWeight: 700,
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontWeight: 600,
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
@@ -110,7 +114,7 @@ const Navigation = () => {
     const [messageOpen, setMessageOpen] = useState(false);
     const handleMessageClose = () => {
         setMessageOpen(false);
-        navigate(`/profile`);
+        navigate(`/home`);
     };
 
     const handleMessageOpen = () => {
@@ -121,13 +125,18 @@ const Navigation = () => {
     const logoutUser = () => {
         setLoading(true);
         localStorage.removeItem('userInfo');
+        const addonMessage = {
+            message: 'Successfully Logout'
+        };
+        setMessage(addonMessage);
+        handleMessageOpen();
         setLoading(false);
     };
 
     const handleLogoutUser = () => {
         logoutUser();
-        navigate('/');
-        window.location.reload();
+        // navigate('/');
+        // window.location.reload();
     }
 
     const [userData, setUserData] = useState([]);
@@ -177,19 +186,19 @@ const Navigation = () => {
                                     {/* <NavLink to='/tour-plan' style={{ textDecoration: 'none' }} className={classes.link1}>
                                                     {t('nOption1')}
                                                 </NavLink> */}
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link}>
+                                    <NavLink to='/' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link}>
                                         HOME
                                     </NavLink>
-                                    <NavLink to='/about' style={{ textDecoration: 'none' }} className={classes.link}>
+                                    <NavLink to='/about' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link}>
                                         ABOUT
                                     </NavLink>
                                     {/* <NavLink to='/jobs' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         JOBS
                                     </NavLink> */}
-                                    <NavLink to='/news' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    {/* <NavLink to='/news' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         NEWS
-                                    </NavLink>
-                                    <NavLink to='/contact' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    </NavLink> */}
+                                    <NavLink to='/contact' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link4}>
                                         CONTACT
                                     </NavLink>
                                 </Grid>
@@ -416,10 +425,10 @@ const Navigation = () => {
                                             </>
                                             :
                                             <>
-                                                <NavLink to='/login' style={{ textDecoration: 'none' }} className={classes.link5}>
+                                                <NavLink to='/login' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link5}>
                                                     Login
                                                 </NavLink>
-                                                <NavLink to='/register' style={{ textDecoration: 'none' }} className={classes.link5}>
+                                                <NavLink to='/register' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link5}>
                                                     Register
                                                 </NavLink>
                                             </>

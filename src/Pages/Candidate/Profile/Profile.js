@@ -232,7 +232,7 @@ const Profile = () => {
                                 container
                                 spacing={4}
                             >
-                                <Grid item md={5}>
+                                <Grid item md={7}>
                                     <Grid sx={{ borderRadius: '10px', boxShadow: '4' }}>
                                         <Grid sx={{ backgroundColor: '#B0AADC', borderRadius: '10px' }}>
                                             <Typography sx={{ fontSize: '17px', fontWeight: '600', padding: '10px 20px' }}>
@@ -375,14 +375,14 @@ const Profile = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item md={3}>
+                                <Grid item md={5}>
                                     <Grid sx={{ backgroundColor: '#B0AADC', borderRadius: '10px', marginBottom: '20px' }}>
                                         <Typography sx={{ fontSize: '17px', fontWeight: '600', padding: '10px 20px' }}>
                                             Join Meeting
                                         </Typography>
                                     </Grid>
                                     {
-                                        meetingInfo.map((info) => <Grid key={info?._id}>
+                                        meetingInfo.map((info) => <Grid key={info?._id} sx={{ marginBottom: '20px' }}>
                                             <Grid sx={{ marginBottom: '10px' }}>
                                                 <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
                                                     Your Job Title : {info?.title}
@@ -390,12 +390,12 @@ const Profile = () => {
                                             </Grid>
                                             <Grid sx={{ marginBottom: '10px' }}>
                                                 <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                                    Your Room ID : {info?.roomId}
+                                                    Your Meeting Time : {info?.meeting}
                                                 </Typography>
                                             </Grid>
                                             <Grid>
                                                 <Button variant='contained' component="label">
-                                                    <a href={info?.meeting} style={{ textDecoration: 'none', }} target="_blank" download rel="noreferrer">
+                                                    <a href={info?.meetingLink} style={{ textDecoration: 'none', }} target="_blank" download rel="noreferrer">
                                                         Join Meeting
                                                     </a>
                                                 </Button>
@@ -403,8 +403,8 @@ const Profile = () => {
                                         </Grid>)
                                     }
                                 </Grid>
-                                <Grid item md={4}>
-                                    <Grid>
+                                <Grid item md={0}>
+                                    {/* <Grid>
                                         <Grid>
                                             <Typography sx={{ fontSize: '25px', fontWeight: '600', marginBottom: '10px' }}>
                                                 FEATURED JOB
@@ -580,7 +580,7 @@ const Profile = () => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                    </Grid>
+                                    </Grid> */}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -589,63 +589,6 @@ const Profile = () => {
                 {
                     loading && <Loader />
                 }
-                <Grid>
-                    <Container>
-                        <Grid sx={{ marginTop: '100px', marginBottom: '50px' }}>
-                            <Grid sx={{ backgroundColor: '#FFFDFD', boxShadow: '6', padding: '40px 40px', borderRadius: '20px', backgroundImage: 'linear-gradient(to right, #9F37CE, #291F78)' }}>
-                                <Grid
-                                    container
-                                    spacing={4}
-                                    alignItems='center'
-                                >
-                                    <Grid item md={6}>
-                                        <Grid>
-                                            <Typography sx={{ fontSize: '30px', fontWeight: '600', letterSpacing: '5px', color: '#000000' }}>
-                                                Never Want to Miss Any
-                                            </Typography>
-                                            <Typography sx={{ fontSize: '35px', fontWeight: '600', letterSpacing: '5px', color: '#291F78' }}>
-                                                Job News?
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <Grid
-                                            container
-                                            spacing={1}
-                                        >
-                                            <Grid item md={6}>
-                                                <TextField
-                                                    sx={{
-                                                        color: 'white', width: '100%', borderRadius: '10px', backgroundColor: 'white', [`& fieldset`]: {
-                                                            borderRadius: '10px',
-                                                        },
-                                                    }}
-                                                    value={newsEmail}
-                                                    onChange={newsEmailChange}
-                                                    placeholder='Email'
-                                                    variant="outlined"
-                                                    size='small'
-                                                />
-                                            </Grid>
-                                            <Grid item md={6}>
-                                                <Button variant='contained'
-                                                    onClick={hanldeNews}
-                                                    style={{
-                                                        color: 'white', fontSize: '17px', borderRadius: '15px', backgroundColor: '#291F78', width: '100%', ':hover': {
-                                                            bgcolor: '#291F78',
-                                                            color: 'white',
-                                                        }
-                                                    }}>
-                                                    Submit
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Container>
-                </Grid>
             </Grid>
             <Footer />
             {

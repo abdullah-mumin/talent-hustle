@@ -20,7 +20,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 350,
+    width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -41,6 +41,17 @@ const JobDetails = () => {
         setTimeout(() => handleClose(), 3000);
         // message.message === 'Successfully Applied' ? navigate(`/`) : navigate(`/job-details/${id}`);
     };
+
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, [userData]);
 
     //Modal
     const [opens, setOpens] = useState(false);
@@ -87,18 +98,6 @@ const JobDetails = () => {
             })
     }, []);
     // console.log(jobInfo);
-    
-
-    const [userData, setUserData] = useState([]);
-    useEffect(() => {
-        let interval = setInterval(() => {
-            if (userData) {
-                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
-                setUserData(updateInfo || []);
-            }
-        }, 200)
-        return () => clearInterval(interval);
-    }, []);
 
     const [url, setUrl] = React.useState('');
     const [item, setItem] = useState({ cv: '' });
@@ -117,8 +116,8 @@ const JobDetails = () => {
         const info = {
             'name': name,
             'email': userData?.email,
-            'title' : jobInfo?.title,
-            'cvEmail' : email,
+            'title': jobInfo?.title,
+            'cvEmail': email,
             'companyEmail': jobInfo.companyEmail,
             'number': number,
             'letter': letter,
@@ -238,14 +237,14 @@ const JobDetails = () => {
                                                             </Grid>
                                                             <Grid item md={6}></Grid>
                                                         </Grid>
-                                                        <Typography sx={{ fontSize: '15px', marginBottom: '10px' }}>
+                                                        {/* <Typography sx={{ fontSize: '15px', marginBottom: '10px' }}>
                                                             Posted : 30+ days ago 'Based on your profile'
-                                                        </Typography>
+                                                        </Typography> */}
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid>
+                                        {/* <Grid>
                                             <Grid sx={{ marginTop: '20px' }}>
                                                 <Typography sx={{ fontSize: '20px', fontWeight: '600' }}>
                                                     QUALIFICATION
@@ -297,7 +296,7 @@ const JobDetails = () => {
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
-                                        </Grid>
+                                        </Grid> */}
                                         <Grid>
                                             <Grid sx={{ marginTop: '20px' }}>
                                                 <Typography sx={{ fontSize: '20px', fontWeight: '600' }}>
@@ -308,48 +307,7 @@ const JobDetails = () => {
                                                 <Grid sx={{ padding: '20px' }}>
                                                     <Grid>
                                                         <Grid>
-                                                            <Typography sx={{ fontSize: '15px' }}>
-                                                                {jobInfo?.description}
-                                                            </Typography>
-                                                        </Grid>
-                                                        <Grid
-                                                            display='flex'
-                                                            alignItems='center'
-                                                            margin='10px 0px'
-                                                        >
-                                                            <TbPointFilled style={{ fontSize: '15px', marginBottom: '2px', marginRight: '5px' }} />
-                                                            <Typography sx={{ fontSize: '15px' }}>
-                                                                Work authorization (Required)
-                                                            </Typography>
-                                                        </Grid>
-                                                        <Grid
-                                                            display='flex'
-                                                            alignItems='center'
-                                                            margin='10px 0px'
-                                                        >
-                                                            <TbPointFilled style={{ fontSize: '15px', marginBottom: '2px', marginRight: '5px' }} />
-                                                            <Typography sx={{ fontSize: '15px' }}>
-                                                                Work authorization (Required)
-                                                            </Typography>
-                                                        </Grid>
-                                                        <Grid
-                                                            display='flex'
-                                                            alignItems='center'
-                                                            margin='10px 0px'
-                                                        >
-                                                            <TbPointFilled style={{ fontSize: '15px', marginBottom: '2px', marginRight: '5px' }} />
-                                                            <Typography sx={{ fontSize: '15px' }}>
-                                                                Work authorization (Required)
-                                                            </Typography>
-                                                        </Grid>
-                                                        <Grid
-                                                            display='flex'
-                                                            alignItems='center'
-                                                            margin='10px 0px'
-                                                        >
-                                                            <TbPointFilled style={{ fontSize: '15px', marginBottom: '2px', marginRight: '5px' }} />
-                                                            <Typography sx={{ fontSize: '15px' }}>
-                                                                Work authorization (Required)
+                                                            <Typography dangerouslySetInnerHTML={{__html: jobInfo?.description}} sx={{ fontSize: '15px' }}>
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>
@@ -361,7 +319,7 @@ const JobDetails = () => {
                                 <Grid item md={4}>
                                     <Grid sx={{ marginTop: '40px' }}>
                                         <Grid>
-                                            <img style={{ width: '100%', height: '250px', marginBottom: '-5px' }} src={location} alt="Banner" />
+                                            <img style={{ width: '100%', height: '250px', marginBottom: '-5px' }} src={jobInfo?.image} alt="Banner" />
                                         </Grid>
                                         <Grid sx={{ backgroundColor: '#FFF', padding: '10px 20px' }}>
                                             <Grid sx={{ marginTop: '20px', marginBottom: '10px' }}>
@@ -414,7 +372,7 @@ const JobDetails = () => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                                <Grid sx={{ marginTop: '30px', marginBottom: '20px' }}>
+                                                {/* <Grid sx={{ marginTop: '30px', marginBottom: '20px' }}>
                                                     <Typography sx={{ fontSize: '15px' }}>
                                                         Lorem ipsum dolor sit amet consectetur.
                                                         Faucibus vel nibh turpis mi eget bibendum.
@@ -423,7 +381,7 @@ const JobDetails = () => {
                                                         Lorem ipsum dolor sit amet consectetur.
                                                         Faucibus vel nibh turpis mi eget bibendum.
                                                     </Typography>
-                                                </Grid>
+                                                </Grid> */}
                                             </Grid>
                                         </Grid>
                                         <Grid sx={{ backgroundColor: '#291F78', textAlign: 'center', padding: '5px 0px' }}>
@@ -448,21 +406,6 @@ const JobDetails = () => {
             {
                 loading && <Loader />
             }
-            {/* <Grid>
-                {
-                    item !== null ?
-                        <>
-                            {
-                                item.map(info => <Grid>
-                                    <img style={{ width: '100%', height: 100 }} src={info.image} />
-                                </Grid>)
-                            }
-                        </>
-                        :
-                        <>
-                        </>
-                }
-            </Grid> */}
             <Footer />
             <Modal
                 open={opens}
@@ -470,119 +413,132 @@ const JobDetails = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography sx={{ fontSize: '25px', fontWeight: '600', marginTop: '-20px', marginBottom: '20px' }}>
-                        Apply
-                    </Typography>
-                    <Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Full Name
-                            </Typography>
-                            <TextField
-                                sx={{
-                                    color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
-                                        borderRadius: '5px',
-                                    },
-                                }}
-                                value={name}
-                                onChange={handleNameChange}
-                                placeholder='Enter your name'
-                                variant="outlined"
-                                size='small'
-                            />
-                        </Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Email Address
-                            </Typography>
-                            <TextField
-                                sx={{
-                                    color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
-                                        borderRadius: '5px',
-                                    },
-                                }}
-                                value={email}
-                                onChange={handleEmailChange}
-                                placeholder='Enter your email'
-                                variant="outlined"
-                                size='small'
-                            />
-                        </Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Cover Letter
-                            </Typography>
-                            <TextField
-                                sx={{
-                                    color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
-                                        borderRadius: '5px',
-                                    },
-                                }}
-                                value={letter}
-                                onChange={handleLetterChange}
-                                placeholder='Enter your cover letter'
-                                variant="outlined"
-                                multiline
-                                rows={3}
-                            />
-                        </Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Phone Number
-                            </Typography>
-                            <TextField
-                                sx={{
-                                    color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
-                                        borderRadius: '5px',
-                                    },
-                                }}
-                                value={number}
-                                onChange={handleNumberChange}
-                                placeholder='Enter your number'
-                                variant="outlined"
-                                size='small'
-                            />
-                        </Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Upload CV
-                            </Typography>
-                            <Grid sx={{ marginTop: '5px' }}>
-                                <FileBase64 multiple={false} type="file" onDone={({ base64 }) => setItem({ ...item, cv: base64 })} />
-                            </Grid>
-                        </Grid>
-                        <Grid sx={{ marginTop: '10px' }}>
-                            <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
-                                Additional Question
-                            </Typography>
-                            <TextField
-                                sx={{
-                                    color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
-                                        borderRadius: '5px',
-                                    },
-                                }}
-                                value={experience}
-                                onChange={handleExperienceChange}
-                                placeholder='How many years of experience ?'
-                                variant="outlined"
-                                size='small'
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid sx={{ marginTop: '30px' }}>
-                        <Button variant='contained'
-                            onClick={hanldeApply}
-                            style={{
-                                color: 'white', fontSize: '17px', backgroundColor: '#291F78', width: '100%', ':hover': {
-                                    bgcolor: '#291F78',
-                                    color: 'white',
-                                }
-                            }}>
-                            SUBMIT APPLICATION
-                        </Button>
-                    </Grid>
-                </Box>
+                {
+                    userData?.isCandidate === '1' ?
+                        <>
+                            <Box sx={style}>
+                                <Typography sx={{ fontSize: '25px', fontWeight: '600', marginTop: '-20px', marginBottom: '20px' }}>
+                                    Apply
+                                </Typography>
+                                <Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Full Name
+                                        </Typography>
+                                        <TextField
+                                            sx={{
+                                                color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
+                                                    borderRadius: '5px',
+                                                },
+                                            }}
+                                            value={name}
+                                            onChange={handleNameChange}
+                                            placeholder='Enter your name'
+                                            variant="outlined"
+                                            size='small'
+                                        />
+                                    </Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Email Address
+                                        </Typography>
+                                        <TextField
+                                            sx={{
+                                                color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
+                                                    borderRadius: '5px',
+                                                },
+                                            }}
+                                            value={email}
+                                            onChange={handleEmailChange}
+                                            placeholder='Enter your email'
+                                            variant="outlined"
+                                            size='small'
+                                        />
+                                    </Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Cover Letter
+                                        </Typography>
+                                        <TextField
+                                            sx={{
+                                                color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
+                                                    borderRadius: '5px',
+                                                },
+                                            }}
+                                            value={letter}
+                                            onChange={handleLetterChange}
+                                            placeholder='Enter your cover letter'
+                                            variant="outlined"
+                                            multiline
+                                            rows={3}
+                                        />
+                                    </Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Phone Number
+                                        </Typography>
+                                        <TextField
+                                            sx={{
+                                                color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
+                                                    borderRadius: '5px',
+                                                },
+                                            }}
+                                            value={number}
+                                            onChange={handleNumberChange}
+                                            placeholder='Enter your number'
+                                            variant="outlined"
+                                            size='small'
+                                        />
+                                    </Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Upload CV
+                                        </Typography>
+                                        <Grid sx={{ marginTop: '5px' }}>
+                                            <FileBase64 multiple={false} type="file" onDone={({ base64 }) => setItem({ ...item, cv: base64 })} />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid sx={{ marginTop: '10px' }}>
+                                        <Typography sx={{ fontSize: '15px', fontWeight: '600' }}>
+                                            Additional Question
+                                        </Typography>
+                                        <TextField
+                                            sx={{
+                                                color: 'white', width: '100%', borderRadius: '5px', backgroundColor: 'white', [`& fieldset`]: {
+                                                    borderRadius: '5px',
+                                                },
+                                            }}
+                                            value={experience}
+                                            onChange={handleExperienceChange}
+                                            placeholder='How many years of experience ?'
+                                            variant="outlined"
+                                            size='small'
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid sx={{ marginTop: '30px' }}>
+                                    <Button variant='contained'
+                                        onClick={hanldeApply}
+                                        style={{
+                                            color: 'white', fontSize: '17px', backgroundColor: '#291F78', width: '100%', ':hover': {
+                                                bgcolor: '#291F78',
+                                                color: 'white',
+                                            }
+                                        }}>
+                                        SUBMIT APPLICATION
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </>
+                        :
+                        <>
+                            <Box sx={style}>
+                                <Typography sx={{ fontSize: '24px', fontWeight: '600' }}>
+                                    Please login as a candidate to apply this job!
+                                </Typography>
+                            </Box>
+                        </>
+                }
             </Modal>
             {
                 open && <Message open={open} onclose={handleClose} message={message} />

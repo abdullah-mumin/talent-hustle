@@ -25,8 +25,8 @@ const ManageResume = () => {
 
     const [applyInfo, setApplyInfo] = useState([]);
     useEffect(() => {
-        // setLoading(true);
         if (userData?.email) {
+            // setLoading(true);
             fetch(`https://talent-hustle-server.vercel.app/apply/${userData?.email}`, {
             })
                 .then(res => res.json())
@@ -38,12 +38,17 @@ const ManageResume = () => {
     }, [applyInfo, userData?.email]);
     // console.log(userData);
     // console.log(applyInfo);
-    const [email, setEmail] = useState('https://talent-hustle-video.netlify.app/');
-    const emailChange = (e) => {
-        setEmail(e.target.value);
+    const [time, setTime] = useState('');
+    const [meeting, setMeeting] = useState('');
+    const meetingChange = (e, value) => {
+        setTime(value);
+        // console.log(value);
+        setMeeting(e.target.value);
     }
+    const [id, setId] = useState('');
     const [roomId, setRoomId] = useState('');
-    const roomIdChange = (e) => {
+    const roomIdChange = (e, value) => {
+        setId(value);
         setRoomId(e.target.value);
     };
 
@@ -63,12 +68,34 @@ const ManageResume = () => {
     const hanldeMeeting = async (data, e) => {
         // onCloseModal();
         // console.log(data);
+        let ebody = `
+        <b> Job Title : </b>${data?.title ? data?.title : ''}
+        <br />
+        <b> Meeting Link : </b>https://talent-hustle-video.netlify.app/room/${roomId}
+        <br />
+        <b> Meeting Time : </b> ${meeting}
+        <br />
+
+
+        `
+
         const info = {
             'email': data?.email,
-            'title' : data?.title,
-            'meeting': email,
-            'roomId': roomId
+            'title': data?.title,
+            'meeting': meeting,
+            'meetingLink': `https://talent-hustle-video.netlify.app/room/${roomId}`,
         }
+
+        window.Email.send({
+            SecureToken: "bccefa6a-867c-4efb-9dcf-e35589cc9f03",
+            To: data?.email,
+            From: 'talenthustle111@gmail.com',
+            Subject: "Regarding Job Interview",
+            Body: ebody
+        }).then(
+            // message => alert(message)
+        );
+
         try {
             setLoading(true);
             const response = await fetch(`https://talent-hustle-server.vercel.app/meeting`, {
@@ -81,7 +108,7 @@ const ManageResume = () => {
             const result = await response.json();
             setLoading(true);
             if (result.message === 'Successful') {
-                setEmail('');
+                setMeeting('');
                 setRoomId('');
                 const addonMessage = {
                     message: 'Successfully Submit Meeting Information.'
@@ -91,7 +118,7 @@ const ManageResume = () => {
                 setLoading(false);
             }
             else if (result.message === 'Failed') {
-                setEmail('');
+                setMeeting('');
                 setRoomId('');
                 const addonMessage = {
                     message: 'Failed to submit meeting information!!! Try Again...'
@@ -111,7 +138,7 @@ const ManageResume = () => {
                 <Grid sx={{ marginTop: '50px', marginBottom: '150px' }}>
                     <Grid sx={{ backgroundColor: '#291F78', textAlign: 'center', padding: '10px 0px', marginBottom: '50px' }}>
                         <Typography sx={{ fontSize: '20px', color: 'white' }}>
-                            Manage Resume List
+                            Candidates Resume List
                         </Typography>
                     </Grid>
                     {
@@ -195,9 +222,9 @@ const ManageResume = () => {
                                                         borderRadius: 'px',
                                                     },
                                                 }}
-                                                value={email}
-                                                onChange={emailChange}
-                                                placeholder='Meeting Link'
+                                                value={time === info?._id ? meeting : ''}
+                                                onChange={(e) => meetingChange(e, info?._id)}
+                                                placeholder='Meeting Date & Time'
                                                 variant="outlined"
                                                 size='small'
                                             />
@@ -209,8 +236,8 @@ const ManageResume = () => {
                                                         borderRadius: 'px',
                                                     },
                                                 }}
-                                                value={roomId}
-                                                onChange={roomIdChange}
+                                                value={id === info?._id ? roomId : ''}
+                                                onChange={(e) => roomIdChange(e, info?._id)}
                                                 placeholder='Room Id'
                                                 variant="outlined"
                                                 size='small'

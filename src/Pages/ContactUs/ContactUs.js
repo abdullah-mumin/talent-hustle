@@ -1,6 +1,6 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import about from '../../Images/About/about.png'
+import contact from '../../Images/contact33.png'
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 import { useNavigate } from 'react-router-dom';
@@ -128,6 +128,10 @@ const ContactUs = () => {
             console.error("Error:", error);
         }
     };
+
+    const handleClick = () => {
+
+    }
     return (
         <Grid>
             <>
@@ -135,9 +139,9 @@ const ContactUs = () => {
                 <Grid>
                     <Grid>
                         <Grid>
-                            <img style={{ width: '100%', height: '450px', }} src={about} alt="Banner" />
+                            <img style={{ width: '100%', height: '450px', }} src={contact} alt="Banner" />
                         </Grid>
-                        <Grid marginTop='-300px'>
+                        <Grid marginTop='-280px'>
                             <Typography sx={{ fontSize: '30px', color: 'black', fontWeight: '600', textAlign: 'center', letterSpacing: '5px' }}>
                                 Contact Us
                             </Typography>
@@ -175,7 +179,7 @@ const ContactUs = () => {
                                                             Address
                                                         </Typography>
                                                         <Typography sx={{ fontSize: '12px', fontWeight: '600', color: '#000000' }}>
-                                                            Banani 
+                                                            Banani
                                                         </Typography>
                                                         <Typography sx={{ fontSize: '12px', fontWeight: '600', color: '#000000' }}>
                                                             Suite 13 Road
@@ -189,7 +193,7 @@ const ContactUs = () => {
                                                             Email
                                                         </Typography>
                                                         <Typography sx={{ fontSize: '12px', fontWeight: '600', color: '#000000' }}>
-                                                           talenthustle111@gmail.com
+                                                            talenthustle111@gmail.com
                                                         </Typography>
                                                     </Grid>
                                                     <Grid sx={{ marginTop: '10px' }}>
@@ -287,17 +291,23 @@ const ContactUs = () => {
                             <Typography sx={{ fontSize: '30px', color: 'white', fontWeight: '600', letterSpacing: '2px' }}>
                                 HAVE A QUESTION?
                             </Typography>
-                            <Typography sx={{ fontSize: '15px', color: 'white', fontWeight: '600', marginTop: '10px' }}>
+                            <Typography sx={{ fontSize: '15px', color: 'white', fontWeight: '600', marginTop: '10px', marginBottom: '20px' }}>
                                 We are here to help. Email us or call +8801690134270
                             </Typography>
-                            <Button variant='contained' style={{
+                            {/* <Button variant='contained' style={{
                                 color: 'black', fontWeight: '600', marginTop: '20px', fontSize: '17px', borderRadius: '10px', backgroundColor: '#FFFFFF', width: '250px', ':hover': {
                                     bgcolor: '#FFFFFF',
                                     color: 'black',
                                 }
                             }}>
                                 Contact Us
-                            </Button>
+                            </Button> */}
+                            <a style={{
+                                textDecoration: 'none', color: 'black', padding: '10px 20px', fontWeight: '700', fontSize: '17px', borderRadius: '10px', backgroundColor: '#FFFFFF', width: '250px', ':hover': {
+                                    bgcolor: '#FFFFFF',
+                                    color: 'black',
+                                }
+                            }} className='btn' target="_blank" href="mailto:info@trektil.com" rel="noreferrer">Contact Us</a>
                         </Grid>
                     </Grid>
                     <Grid>

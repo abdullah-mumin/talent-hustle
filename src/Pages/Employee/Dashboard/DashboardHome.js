@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { BarSeries } from '@devexpress/dx-react-chart';
 import avater1 from '../../../Images/men.jpg';
 import ManageResume from '../ManageResume/ManageResume';
+import Loader from '../../../Component/Loader/Loader';
 
 const chartData = [
     { month: 'Jan', population: 2.525 },
@@ -33,17 +34,32 @@ const chartData = [
 const DashboardHome = () => {
     // console.log(chartData)
     const [loading, setLoading] = useState(false);
+
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, []);
+
     const [applyInfo, setApplyInfo] = useState([]);
     useEffect(() => {
         setLoading(true);
-        fetch(`https://talent-hustle-server.vercel.app/apply`, {
-        })
-            .then(res => res.json())
-            .then(data => {
-                setApplyInfo(data);
-                setLoading(false);
+        if (userData?.email) {
+            fetch(`https://talent-hustle-server.vercel.app/apply/${userData?.email}`, {
             })
-    }, []);
+                .then(res => res.json())
+                .then(data => {
+                    setApplyInfo(data);
+                    setLoading(false);
+                })
+        }
+    }, [applyInfo, userData?.email]);
+    // console.log(applyInfo);
 
     return (
         <Grid>
@@ -54,7 +70,7 @@ const DashboardHome = () => {
 
                 >
                     <Grid item md={4}>
-                        <Grid sx={{ border: '1px solid gray', borderRadius: '10px', padding: '20px 0px', textAlign: 'center' }}>
+                        {/* <Grid sx={{ border: '1px solid gray', borderRadius: '10px', padding: '20px 0px', textAlign: 'center' }}>
                             <Grid>
                                 <BiHomeAlt style={{ fontSize: '40px' }} />
                             </Grid>
@@ -68,7 +84,7 @@ const DashboardHome = () => {
                                     Jobs View
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Grid item md={4}>
                         <Grid sx={{ border: '1px solid gray', borderRadius: '10px', padding: '20px 0px', textAlign: 'center' }}>
@@ -88,7 +104,7 @@ const DashboardHome = () => {
                         </Grid>
                     </Grid>
                     <Grid item md={4}>
-                        <Grid sx={{ border: '1px solid gray', borderRadius: '10px', padding: '20px 0px', textAlign: 'center' }}>
+                        {/* <Grid sx={{ border: '1px solid gray', borderRadius: '10px', padding: '20px 0px', textAlign: 'center' }}>
                             <Grid>
                                 <TbActivityHeartbeat style={{ fontSize: '40px' }} />
                             </Grid>
@@ -102,15 +118,18 @@ const DashboardHome = () => {
                                     Month Views
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Grid>
+                {/* {
+                    loading && <Loader />
+                } */}
                 <Grid
                     container
                     spacing={4}
                     marginTop='50px'
                 >
-                    <Grid item md={8}>
+                    <Grid item md={12}>
                         {/* <Grid
                             boxShadow={3}
                             backgroundColor='#FFFFFF'
@@ -135,8 +154,8 @@ const DashboardHome = () => {
                             <ManageResume />
                         </Grid>
                     </Grid>
-                    <Grid item md={4}>
-                        <Grid>
+                    <Grid item md={0}>
+                        {/* <Grid>
                             <Grid sx={{ backgroundColor: '#291F78', textAlign: 'center', padding: '10px 0px' }}>
                                 <Typography sx={{ fontSize: '20px', color: 'white' }}>
                                     User Comment
@@ -230,7 +249,7 @@ const DashboardHome = () => {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Grid>
             </Grid>

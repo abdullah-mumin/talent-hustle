@@ -12,7 +12,7 @@ const Main = () => {
             <Navigation />
             <Banner />
             <SearchArea />
-            <JobSector />
+            {/* <JobSector /> */}
             <Footer />
         </Grid>
     );

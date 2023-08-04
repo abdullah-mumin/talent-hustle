@@ -4,6 +4,8 @@ import FileBase64 from 'react-file-base64';
 import Message from '../../../Component/Message/Message';
 import Loader from '../../../Component/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const jobTypes = [
     {
@@ -101,13 +103,12 @@ const ManageJobsPost = () => {
         setJobSkill(e.target.value);
     };
     const [description, setDescription] = useState('');
-    const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
+    const handleDescriptionChange = (value) => {
+        setDescription(value);
     };
 
     const [image, setImage] = useState({ logo: '' });
 
-    // console.log(jobSkill);
 
     const [open, setOpen] = useState(false);
     const handleClose = () => {
@@ -137,7 +138,7 @@ const ManageJobsPost = () => {
     const hanldeJobPost = async (e) => {
         const info = {
             'companyName': companyName,
-            'companyEmail' : userData?.email,
+            'companyEmail': userData?.email,
             'title': companyTitle,
             'email': companyEmail,
             'number': companyNumber,
@@ -496,7 +497,7 @@ const ManageJobsPost = () => {
                                 <Typography sx={{ fontSize: '15px', fontWeight: '600', marginTop: '15px' }}>
                                     Job Description
                                 </Typography>
-                                <TextField
+                                {/* <TextField
                                     id="outlined-basic"
                                     multiline
                                     rows={4}
@@ -507,7 +508,11 @@ const ManageJobsPost = () => {
                                     onChange={handleDescriptionChange}
                                     type='text'
                                     name='fullName'
-                                />
+                                /> */}
+                                <ReactQuill
+                                    theme="snow"
+                                    value={description}
+                                    onChange={handleDescriptionChange} />
                             </Grid>
                         </Grid>
                         <Grid sx={{ marginTop: '50px', textAlign: 'end' }}>

@@ -1,6 +1,6 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import about from '../../Images/About/about.png'
+import about from '../../Images/new/about001.png';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 import { useNavigate } from 'react-router-dom';
@@ -152,142 +152,59 @@ const About = () => {
                                 container
                                 spacing={8}
                             >
-                                <Grid item md={7}>
+                                <Grid item md={12}>
                                     <Typography sx={{ fontSize: '30px', fontWeight: '600' }}>
-                                        About Recruitment Agency
+                                        About Talent Hustle
                                     </Typography>
                                     <Typography sx={{ fontSize: '17px', marginTop: '20px' }}>
-                                        Helping people all around the world bag their dream job.
+                                        At TalentHustle, we understand the challenges that both
+                                        job seekers and employers face in today's competitive
+                                        job market. That's why we've created a user-friendly
+                                        platform that is easy to navigate and offers a wide
+                                        range of features to help both parties achieve their goals.
                                     </Typography>
                                     <Typography sx={{ fontSize: '17px', marginTop: '20px' }}>
-                                        Welcome to TalentTrail, an innovative interview platform designed
-                                        to connect job seekers with top employers from around the world.
-                                        Our mission is to simplify the job search process by providing a
-                                        comprehensive platform where job seekers can showcase their skills
-                                        and qualifications, and employers can find the right talent to
-                                        fill their open positions.
+                                        For job seekers, our platform offers a number of benefits,
+                                        including the ability to create a customized profile, search
+                                        for job openings based on their specific preferences and
+                                        qualifications, and schedule interviews with employers directly
+                                        through our website. We also offer a wealth of resources to help
+                                        job seekers improve their resumes, cover letters, and interviewing
+                                        skills, so they can put their best foot forward during the hiring process.
                                     </Typography>
-                                    <Typography sx={{ fontSize: '17px', marginTop: '20px' }}>
-                                        Pellentesque habitant morbi tristique senectus et netus et
-                                        malesuada fames ac turpis egestas. Pellentesque nec arc
-                                        u consequat, bibendum elit vestibulum, malesuada massa
-                                        . Ut quam metus, euismod eget aliquet sit amet, blandit non.
-                                        Sed semper elit quis est bibendum pharetra. Pellentesque
-                                        posuere in erat sed tempor. Mauris lectus lorem, vehicula
-                                        in sapien id, mattis hendrerit elit. In varius pulvinar turpis,
-                                        vitae venenatis lectus dapibus etc.
+                                    <Typography sx={{ fontSize: '17px', marginTop: '20px', marginBottom: '20px' }}>
+                                        For employers, our platform provides access to a pool of highly qualified
+                                        candidates from around the world, along with tools to streamline the hiring
+                                        process, including automated interview scheduling, candidate screening,
+                                        and applicant tracking. Our platform is also designed to help employers
+                                        build their brand and attract top talent through targeted advertising
+                                        and employer branding features.
                                     </Typography>
-                                    <Typography sx={{ fontSize: '17px', marginTop: '20px', marginBottom: '100px' }}>
-                                        Pellentesque habitant morbi tristique senectus et netus et
-                                        malesuada fames ac turpis egestas. Pellentesque nec arc
-                                        u consequat, bibendum elit vestibulum, malesuada massa
-                                        . Ut quam metus, euismod eget aliquet sit amet, blandit non.
-                                        Sed semper elit quis est bibendum pharetra. Pellentesque
-                                        posuere in erat sed tempor. Mauris lectus lorem, vehicula
-                                        in sapien id, mattis hendrerit elit. In varius pulvinar turpis,
-                                        vitae venenatis lectus dapibus etc.
+                                    <Typography sx={{ fontSize: '30px', fontWeight: '600' }}>
+                                        Mission
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '17px', marginTop: '10px' }}>
+                                        We think everyone should be able to progress toward a profession
+                                        that provides them a sense of direction.
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '17px', marginTop: '10px' }}>
+                                        TalenHustle's goal is to create personal success for everyone
+                                        as a result. Despite of history or starting place, we seek to
+                                        give the tools and opportunities that will allow everyone to
+                                        find purpose and worth in their work.
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '17px', marginTop: '10px' }}>
+                                        Because more successful matches between job seekers and employers benefit everyone.
                                     </Typography>
                                 </Grid>
-                                <Grid item md={5}>
-                                    <Grid>
-                                        <Grid sx={{ backgroundColor: '#291F78', textAlign: 'center', padding: '5px 0px' }}>
-                                            <Typography sx={{ fontSize: '20px', color: 'white' }}>
-                                                CONTACT RECRUITMENT
-                                            </Typography>
-                                        </Grid>
-                                        <Grid sx={{ backgroundColor: '#B0ACAC', padding: '10px 20px' }}>
-                                            <Grid>
-                                                <Grid>
-                                                    <TextField
-                                                        sx={{
-                                                            color: 'white', width: '100%', borderRadius: '5px', marginTop: '8px', backgroundColor: 'white', [`& fieldset`]: {
-                                                                borderRadius: 'px',
-                                                            },
-                                                        }}
-                                                        value={name}
-                                                        onChange={nameChange}
-                                                        placeholder='Name'
-                                                        variant="outlined"
-                                                        size='small'
-                                                    />
-                                                </Grid>
-                                                <Grid>
-                                                    <TextField
-                                                        sx={{
-                                                            color: 'white', width: '100%', borderRadius: '5px', marginTop: '8px', backgroundColor: 'white', [`& fieldset`]: {
-                                                                borderRadius: 'px',
-                                                            },
-                                                        }}
-                                                        value={email}
-                                                        onChange={emailChange}
-                                                        placeholder='Email'
-                                                        variant="outlined"
-                                                        size='small'
-                                                    />
-                                                </Grid>
-                                                <Grid>
-                                                    <TextField
-                                                        sx={{
-                                                            color: 'white', width: '100%', borderRadius: '5px', marginTop: '8px', backgroundColor: 'white', [`& fieldset`]: {
-                                                                borderRadius: 'px',
-                                                            },
-                                                        }}
-                                                        value={messages}
-                                                        onChange={messagesChange}
-                                                        placeholder='Message'
-                                                        variant="outlined"
-                                                        rows={6}
-                                                        multiline
-                                                        size='small'
-                                                    />
-                                                </Grid>
-                                                <Grid sx={{ marginTop: '20px' }}>
-                                                    <Button variant='contained'
-                                                        onClick={hanldeContact}
-                                                        style={{
-                                                            color: 'white', fontSize: '17px', borderRadius: '10px', backgroundColor: '#291F78', width: '100%', ':hover': {
-                                                                bgcolor: '#291F78',
-                                                                color: 'white',
-                                                            }
-                                                        }}>
-                                                        SEND MESSAGE
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid sx={{ marginTop: '20px', marginBottom: '10px' }}>
-                                                <Grid>
-                                                    <Typography sx={{ fontSize: '18px', fontWeight: '600', color: 'white' }}>
-                                                        Address
-                                                    </Typography>
-                                                    <Typography sx={{ fontSize: '12px', fontWeight: '600', color: 'white' }}>
-                                                        Banani, Dhaka, Bangladesh
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid sx={{ marginTop: '10px' }}>
-                                                    <Typography sx={{ fontSize: '18px', fontWeight: '600', color: 'white' }}>
-                                                        Email
-                                                    </Typography>
-                                                    <Typography sx={{ fontSize: '12px', fontWeight: '600', color: 'white' }}>
-                                                        talenthustle111@gmail.com
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid sx={{ marginTop: '10px' }}>
-                                                    <Typography sx={{ fontSize: '18px', fontWeight: '600', color: 'white' }}>
-                                                        Call
-                                                    </Typography>
-                                                    <Typography sx={{ fontSize: '12px', fontWeight: '600', color: 'white' }}>
-                                                        +8801690134270
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
+                                <Grid item md={0}>
+
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Container>
                 </Grid>
-                <Grid sx={{ backgroundColor: '#453D83', padding: '20px 0px' }}>
+                {/* <Grid sx={{ backgroundColor: '#453D83', padding: '20px 0px' }}>
                     <Grid sx={{ textAlign: 'center' }}>
                         <Typography sx={{ fontSize: '30px', color: 'white', fontWeight: '600', letterSpacing: '2px' }}>
                             HAVE A QUESTION?
@@ -304,11 +221,11 @@ const About = () => {
                             Contact Us
                         </Button>
                     </Grid>
-                </Grid>
+                </Grid> */}
                 {
                     loading && <Loader />
                 }
-                <Grid>
+                {/* <Grid>
                     <Container>
                         <Grid sx={{ marginTop: '50px', marginBottom: '50px' }}>
                             <Grid sx={{ backgroundColor: '#FFFDFD', boxShadow: '6', padding: '40px 40px', borderRadius: '20px', backgroundImage: 'linear-gradient(to right, #9F37CE, #291F78)' }}>
@@ -364,7 +281,7 @@ const About = () => {
                             </Grid>
                         </Grid>
                     </Container>
-                </Grid>
+                </Grid> */}
             </Grid>
             <Footer />
             {

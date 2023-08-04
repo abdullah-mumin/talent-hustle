@@ -16,7 +16,7 @@ const Footer = () => {
                 color="white"
             >
                 <Container>
-                    <Grid container spacing={4}>
+                    <Grid container spacing={4} sx={{ marginBottom: '100px' }}>
                         {/* <Grid item xs={12} sm={6} md={3} marginBottom='10px'>
                             <Box sx={{ fontWeight: '600', fontSize: 25, marginBottom: 2 }}>
                                 JOBHUNT
@@ -33,7 +33,7 @@ const Footer = () => {
                                 ABOUT US
                             </Box>
                             <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
+                                <Link href="/about" sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'
@@ -42,48 +42,8 @@ const Footer = () => {
                                     About Talent Hustle
                                 </Link>
                             </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    Terms and Condition
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    International Partner
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    Privacy Policy
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    Feedback
-                                </Link>
-                            </Box>
                             <Box>
-                                <Link href="/" sx={{
+                                <Link href="/contact" sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'
@@ -95,26 +55,16 @@ const Footer = () => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={3} marginBottom='10px'>
                             <Box sx={{ fontWeight: '500', fontSize: 20, marginBottom: 2 }}>
-                                JOB SEEKERS
+                                CANDIDATE
                             </Box>
                             <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
+                                <Link href="/register" sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'
                                     },
                                 }} color="inherit">
                                     Create Account
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    Career Counseling
                                 </Link>
                             </Box>
                         </Grid>
@@ -123,7 +73,7 @@ const Footer = () => {
                                 EMPLOYEES
                             </Box>
                             <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
+                                <Link href="/register" sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'
@@ -132,33 +82,13 @@ const Footer = () => {
                                     Create Account
                                 </Link>
                             </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    Product/Service
-                                </Link>
-                            </Box>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3} marginBottom='10px'>
                             <Box sx={{ fontWeight: '500', fontSize: 20, marginBottom: 2 }}>
-                                TOOLS & SOCIAL MEDIA
+                                SOCIAL MEDIA
                             </Box>
                             <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    FACEBOOK
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
+                                <Link href="https://twitter.com/abirarko2?s=20" target='_blank' sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'
@@ -168,17 +98,7 @@ const Footer = () => {
                                 </Link>
                             </Box>
                             <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
-                                    textDecoration: 'none', '&:hover': {
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    },
-                                }} color="inherit">
-                                    GOOGLE+
-                                </Link>
-                            </Box>
-                            <Box sx={{ marginBottom: '10px' }}>
-                                <Link href="/" sx={{
+                                <Link href="https://www.linkedin.com/in/pias-paul-b92718232/" target='_blank' sx={{
                                     textDecoration: 'none', '&:hover': {
                                         color: 'inherit',
                                         textDecoration: 'none'

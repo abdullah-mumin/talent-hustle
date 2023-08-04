@@ -6,6 +6,7 @@ import Footer from '../../Footer/Footer';
 import DashboardHome from './DashboardHome';
 import ManageResume from '../ManageResume/ManageResume';
 import ManageJobsPost from '../ManageJobsPost/ManageJobsPost';
+import Message from '../../../Component/Message/Message';
 
 const Profile = () => {
 
@@ -18,8 +19,36 @@ const Profile = () => {
     const handleJobs = () => {
         navigate(`/company-dashboard/manage-job`);
     }
-    const handleResume = () => {
-        navigate(`/company-dashboard/manage-resume`);
+    // const handleResume = () => {
+    //     navigate(`/company-dashboard/manage-resume`);
+    // }
+    const [message, setMessage] = useState('');
+    const [messageOpen, setMessageOpen] = useState(false);
+    const handleMessageClose = () => {
+        setMessageOpen(false);
+        navigate(`/home`);
+    };
+
+    const handleMessageOpen = () => {
+        setMessageOpen(true);
+        setTimeout(() => handleMessageClose(), 3000);
+    };
+
+    const logoutUser = () => {
+        setLoading(true);
+        localStorage.removeItem('userInfo');
+        const addonMessage = {
+            message: 'Successfully Logout'
+        };
+        setMessage(addonMessage);
+        handleMessageOpen();
+        setLoading(false);
+    };
+
+    const handleLogoutUser = () => {
+        logoutUser();
+        // navigate('/');
+        // window.location.reload();
     }
 
     return (
@@ -41,9 +70,6 @@ const Profile = () => {
                                     padding='5px'
                                 >
                                     <Grid>
-                                        <Typography variant='body1' sx={{ color: '#16A493B5', fontWeight: '600', fontSize: '11px', marginLeft: '16px', marginTop: '20px' }}>
-                                            APPLICATION
-                                        </Typography>
                                         <Grid width='100%' marginBottom='5px' marginTop='10px'>
                                             <Button
                                                 onClick={handleDashboard}
@@ -58,16 +84,16 @@ const Profile = () => {
                                                 Manage Jobs Post
                                             </Button>
                                         </Grid>
-                                        <Grid width='100%'>
+                                        {/* <Grid width='100%'>
                                             <Button
                                                 onClick={handleResume}
                                                 style={{ color: '#FFFFFF', textTransform: 'none', width: '100%', justifyContent: 'flex-start', marginBottom: '5px', fontWeight: '600', marginLeft: '8px' }}>
                                                 Manage Resume
                                             </Button>
-                                        </Grid>
+                                        </Grid> */}
                                         <Grid width='100%'>
                                             <Button
-                                                // onClick={handleSetting}
+                                                onClick={handleLogoutUser}
                                                 style={{ color: '#FFFFFF', textTransform: 'none', width: '100%', justifyContent: 'flex-start', marginBottom: '5px', fontWeight: '600', marginLeft: '8px' }}>
                                                 Logout
                                             </Button>
@@ -92,6 +118,9 @@ const Profile = () => {
                 </Grid>
             </Grid>
             <Footer />
+            {
+                messageOpen && <Message open={messageOpen} onclose={handleMessageClose} message={message} />
+            }
         </>
     );
 };

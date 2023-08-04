@@ -102,8 +102,8 @@ const Register = () => {
                                                 right now
                                             </Typography>
                                         </Grid>
-                                        <Grid sx={{ textAlign: 'center', marginTop: '100px' }}>
-                                            <img style={{ width: '80%', height: '280px', }} src={login} alt="Banner" />
+                                        <Grid sx={{ textAlign: 'center', marginTop: '70px' }}>
+                                            <img style={{ width: '80%', height: '235px', }} src={login} alt="Banner" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -198,14 +198,14 @@ const Register = () => {
                                                     </Button>
                                                 </form>
                                             </Grid>
-                                            <Grid>
+                                            {/* <Grid>
                                                 <Button
                                                     sx={{ width: '50%', textAlign: 'center', marginTop: '30px', paddingTop: '10px', paddingBottom: '10px', marginRight: '10px', marginLeft: '10px' }}
                                                     variant="contained"
                                                     type="submit" >
                                                     Login with Google
                                                 </Button>
-                                            </Grid>
+                                            </Grid> */}
                                         </Grid>
                                     </Grid>
                                 </Grid>
