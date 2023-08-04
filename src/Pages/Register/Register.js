@@ -7,6 +7,7 @@ import './Register.css';
 import login from '../../Images/Login/login.png';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../Component/Loader/Loader';
+import Message from '../../Component/Message/Message';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -16,6 +17,18 @@ const Register = () => {
     const handleButtonClick = (id) => {
         setFlag(id);
         // console.log(id);
+    };
+
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+        navigate(`/login`);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+        setTimeout(() => handleClose(), 3000);
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -33,7 +46,7 @@ const Register = () => {
         }
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/register`, {
+            const response = await fetch(`https://talent-hustle-server.vercel.app/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,11 +55,23 @@ const Register = () => {
             });
 
             const result = await response.json();
-            setLoading(true);
+            setLoading(false);
             // console.log(result.message);
             if (result.message === 'Register Successful') {
+                const addonMessage = {
+                    message: 'Successfully Registration'
+                };
+                setMessage(addonMessage);
+                handleOpen();
                 setLoading(false);
-                navigate(`/login`);
+            }
+            else if (result.message === 'Register Failed') {
+                const addonMessage = {
+                    message: 'Registration Failed!!! Try Again...'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
             }
         } catch (error) {
             console.error("Error:", error);
@@ -77,8 +102,8 @@ const Register = () => {
                                                 right now
                                             </Typography>
                                         </Grid>
-                                        <Grid sx={{ textAlign: 'center', marginTop: '100px' }}>
-                                            <img style={{ width: '80%', height: '280px', }} src={login} alt="Banner" />
+                                        <Grid sx={{ textAlign: 'center', marginTop: '70px' }}>
+                                            <img style={{ width: '80%', height: '235px', }} src={login} alt="Banner" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -173,14 +198,14 @@ const Register = () => {
                                                     </Button>
                                                 </form>
                                             </Grid>
-                                            <Grid>
+                                            {/* <Grid>
                                                 <Button
                                                     sx={{ width: '50%', textAlign: 'center', marginTop: '30px', paddingTop: '10px', paddingBottom: '10px', marginRight: '10px', marginLeft: '10px' }}
                                                     variant="contained"
                                                     type="submit" >
                                                     Login with Google
                                                 </Button>
-                                            </Grid>
+                                            </Grid> */}
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -190,6 +215,9 @@ const Register = () => {
                 </Grid >
             </Grid >
             <Footer />
+            {
+                open && <Message open={open} onclose={handleClose} message={message} />
+            }
         </>
     );
 };

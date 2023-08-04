@@ -38,9 +38,19 @@ const Jobs = () => {
 
     const [loading, setLoading] = useState(false);
     const [jobInfo, setJobInfo] = useState([]);
+    // useEffect(() => {
+    //     setLoading(true);
+    //     fetch(`https://talent-hustle-server.vercel.app/search/?title=${location.state.title}&location=${location.state.locationInfo}`, {
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setJobInfo(data);
+    //             setLoading(false);
+    //         })
+    // }, []);
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/search/${location.state.title}&${location.state.locationInfo}`, {
+        fetch(`https://talent-hustle-server.vercel.app/search/${location.state.title}&${location.state.locationInfo}`, {
         })
             .then(res => res.json())
             .then(data => {
@@ -57,346 +67,18 @@ const Jobs = () => {
             <Grid>
                 <Grid>
                     <Container>
+                        <Grid>
+                            <Typography sx={{ fontSize: '24px', fontWeight: '700', marginTop: '50px', marginBottom: '-100px' }}>
+                                Job Search Results
+                            </Typography>
+                        </Grid>
                         <Grid
                             container
                             spacing={8}
                         >
-                            <Grid item md={3}>
-                                <Grid
-                                    container
-                                    boxShadow={2}
-                                    borderRadius='10px'
-                                    marginTop='30px'
-                                    padding='10px 20px'
-                                >
-                                    <Grid marginTop='10px'>
-                                        <Typography variant='body2' sx={{ fontWeight: '600', fontSize: '17px', color: '#291F78', marginBottom: '10px' }}>
-                                            SEARCH
-                                        </Typography>
-                                        <Grid sx={{ width: '100%' }}>
-                                            <FormControl className={search}>
-                                                <TextField
-                                                    size="small"
-                                                    variant="outlined"
-                                                    onChange={handleChange}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <SearchIcon />
-                                                            </InputAdornment>
-                                                        ),
-                                                    }}
-                                                />
-                                            </FormControl>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid
-                                    container
-                                    boxShadow={2}
-                                    borderRadius='10px'
-                                    marginTop='30px'
-                                    padding='10px 20px'
-                                >
-                                    <Grid marginTop='5px'>
-                                        <Typography variant='body2' sx={{ fontWeight: '600', fontSize: '17px', color: '#291F78' }}>
-                                            VACANCY TYPE
-                                        </Typography>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Full Time</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Internship</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Part Time</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Temporary</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid
-                                    container
-                                    boxShadow={2}
-                                    borderRadius='10px'
-                                    marginTop='30px'
-                                    padding='10px 20px'
-                                >
-                                    <Grid marginTop='5px'>
-                                        <Typography variant='body2' sx={{ fontWeight: '600', fontSize: '17px', color: '#291F78' }}>
-                                            SECTORS
-                                        </Typography>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Engineering</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Accounting</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Banking</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Digital</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Design</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Education</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid
-                                    container
-                                    boxShadow={2}
-                                    borderRadius='10px'
-                                    marginTop='30px'
-                                    padding='10px 20px'
-                                >
-                                    <Grid marginTop='5px'>
-                                        <Typography variant='body2' sx={{ fontWeight: '600', fontSize: '17px', color: '#291F78' }}>
-                                            DATE POSTED
-                                        </Typography>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Last 6 Hours</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Last 12 Hours</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Last 24 Hours</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Last 7 Days</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>Last 30 Days</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>All</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid
-                                    container
-                                    boxShadow={2}
-                                    borderRadius='10px'
-                                    marginTop='30px'
-                                    padding='10px 20px'
-                                >
-                                    <Grid marginTop='5px'>
-                                        <Typography variant='body2' sx={{ fontWeight: '600', fontSize: '17px', color: '#291F78' }}>
-                                            SALARY
-                                        </Typography>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>0 - 15000</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>15000 - 20000</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>20000 - 30000</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>30000 - 40000</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox size='small'
-                                                            // value={check || ''} checked={check} onChange={handleCheckChange}
-                                                            name="breakfast" />
-                                                    }
-                                                    label={<Typography sx={{ fontSize: '13px' }}>40000+</Typography>}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
+                            <Grid item md={0}>
                             </Grid>
-                            <Grid item md={8}>
+                            <Grid item md={12}>
                                 <Grid sx={{ marginTop: '30px' }}>
                                     <Grid sx={{ border: '1px solid #F3F4F9', boxShadow: '1', borderRadius: '10px', marginBottom: '30px' }}>
                                         <Grid sx={{ padding: '20px 20px' }}>
@@ -410,6 +92,7 @@ const Jobs = () => {
                                                                     container
                                                                     spacing={4}
                                                                     alignItems='center'
+                                                                    marginBottom='50px'
                                                                 >
                                                                     <Grid item md={8}>
                                                                         <Grid>
@@ -1080,77 +763,6 @@ const Jobs = () => {
                 {
                     loading && <Loader />
                 }
-                <Grid sx={{ backgroundColor: '#453D83', padding: '20px 0px' }}>
-                    <Grid sx={{ textAlign: 'center' }}>
-                        <Typography sx={{ fontSize: '30px', color: 'white', fontWeight: '600', letterSpacing: '2px' }}>
-                            HAVE A QUESTION?
-                        </Typography>
-                        <Typography sx={{ fontSize: '15px', color: 'white', fontWeight: '600', marginTop: '10px' }}>
-                            We are here to help. Email us or call +44 534 643 2544
-                        </Typography>
-                        <Button variant='contained' style={{
-                            color: 'black', fontWeight: '600', marginTop: '20px', fontSize: '17px', borderRadius: '10px', backgroundColor: '#FFFFFF', width: '250px', ':hover': {
-                                bgcolor: '#FFFFFF',
-                                color: 'black',
-                            }
-                        }}>
-                            Contact Us
-                        </Button>
-                    </Grid>
-                </Grid>
-                <Grid>
-                    <Container>
-                        <Grid sx={{ marginTop: '50px', marginBottom: '50px' }}>
-                            <Grid sx={{ backgroundColor: '#FFFDFD', boxShadow: '6', padding: '40px 40px', borderRadius: '20px', backgroundImage: 'linear-gradient(to right, #9F37CE, #291F78)' }}>
-                                <Grid
-                                    container
-                                    spacing={4}
-                                    alignItems='center'
-                                >
-                                    <Grid item md={6}>
-                                        <Grid>
-                                            <Typography sx={{ fontSize: '30px', fontWeight: '600', letterSpacing: '5px', color: '#000000' }}>
-                                                Never Want to Miss Any
-                                            </Typography>
-                                            <Typography sx={{ fontSize: '35px', fontWeight: '600', letterSpacing: '5px', color: '#291F78' }}>
-                                                Job News?
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <Grid
-                                            container
-                                            spacing={1}
-                                        >
-                                            <Grid item md={6}>
-                                                <TextField
-                                                    sx={{
-                                                        color: 'white', width: '100%', borderRadius: '10px', backgroundColor: 'white', [`& fieldset`]: {
-                                                            borderRadius: '10px',
-                                                        },
-                                                    }}
-                                                    placeholder='Email'
-                                                    variant="outlined"
-                                                    size='small'
-                                                />
-                                            </Grid>
-                                            <Grid item md={6}>
-                                                <Button variant='contained' style={{
-                                                    color: 'white', fontSize: '17px', borderRadius: '15px', backgroundColor: '#291F78', width: '100%', ':hover': {
-                                                        bgcolor: '#291F78',
-                                                        color: 'white',
-                                                    }
-                                                }}>
-                                                    Submit
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Container>
-                </Grid>
             </Grid>
             <Footer />
         </>

@@ -2,9 +2,10 @@ import { Avatar, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
-import about from '../../Images/About/about.png';
-import news1 from '../../Images/News/news1.png';
-import news2 from '../../Images/News/news2.png';
+import news from '../../Images/News/news.jpg';
+import news1 from '../../Images/new/news1.png';
+import news2 from '../../Images/new/news2.png';
+import news3 from '../../Images/new/news3.jpg';
 import person from '../../Images/News/men.jpg';
 import { FaCommentAlt } from 'react-icons/fa';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -37,7 +38,7 @@ const News = () => {
 
     // const [data, setData] = useState([]);
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/job`, {
+    //     fetch(`https://talent-hustle-server.vercel.app/job`, {
     //     })
     //         .then(res => res.json())
     //         .then(data => {
@@ -54,7 +55,7 @@ const News = () => {
             <Grid>
                 <Grid>
                     <Grid>
-                        <img style={{ width: '100%', height: '450px', }} src={about} alt="Banner" />
+                        <img style={{ width: '100%', height: '450px', }} src={news} alt="Banner" />
                     </Grid>
                     <Grid marginTop='-300px'>
                         <Typography sx={{ fontSize: '30px', color: 'black', fontWeight: '600', textAlign: 'center', letterSpacing: '5px' }}>
@@ -71,7 +72,7 @@ const News = () => {
                             container
                             spacing={4}
                         >
-                            <Grid item md={8}>
+                            <Grid item md={12}>
                                 <Grid>
                                     <Typography sx={{ fontSize: '25px', fontWeight: '600' }}>
                                         Latest News
@@ -81,7 +82,7 @@ const News = () => {
                                             <img style={{ width: '100%', height: '280px', }} src={news1} alt="Banner" />
                                         </Grid>
                                         <Grid sx={{ marginTop: '-80px' }}>
-                                            <Typography sx={{ fontSize: '18px', color: '#291F78', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
+                                            <Typography sx={{ fontSize: '18px', color: 'black', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
                                                 HOW TO TURN REVIEWS INTO REVENUE:
                                                 MAKING THE MOST OF POSITIVE CUSTOMER FEEDBACK.
                                             </Typography>
@@ -144,7 +145,7 @@ const News = () => {
                                                         container
                                                         spacing={4}
                                                     >
-                                                        <Grid item md={10}>
+                                                        <Grid item md={12}>
                                                             <Grid sx={{ padding: '20px 20px 20px 20px', marginBottom: '20px' }}>
                                                                 <Grid sx={{ border: '1px solid gray', borderRadius: '10px', boxShadow: '2' }}>
                                                                     <Grid sx={{ padding: '10px !important' }}>
@@ -158,7 +159,7 @@ const News = () => {
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Grid item md={2}></Grid>
+                                                        <Grid item md={0}></Grid>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -169,7 +170,7 @@ const News = () => {
                                             <img style={{ width: '100%', height: '280px', }} src={news2} alt="Banner" />
                                         </Grid>
                                         <Grid sx={{ marginTop: '-80px' }}>
-                                            <Typography sx={{ fontSize: '18px', color: '#291F78', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
+                                            <Typography sx={{ fontSize: '18px', color: 'black', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
                                                 ARE RETAILERS LOSING CONTROL OF THE CUSTOMER JOURNEY
                                                 TO PERVASIVE SOCIAL PLATFORMS?
                                             </Typography>
@@ -232,7 +233,7 @@ const News = () => {
                                                         container
                                                         spacing={4}
                                                     >
-                                                        <Grid item md={10}>
+                                                        <Grid item md={12}>
                                                             <Grid sx={{ padding: '20px 20px 20px 20px', marginBottom: '20px' }}>
                                                                 <Grid sx={{ border: '1px solid gray', borderRadius: '10px', boxShadow: '2' }}>
                                                                     <Grid sx={{ padding: '10px !important' }}>
@@ -246,7 +247,7 @@ const News = () => {
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Grid item md={2}></Grid>
+                                                        <Grid item md={0}></Grid>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -254,10 +255,10 @@ const News = () => {
                                     </Grid>
                                     <Grid sx={{ marginBottom: '30px' }}>
                                         <Grid>
-                                            <img style={{ width: '100%', height: '280px', }} src={news1} alt="Banner" />
+                                            <img style={{ width: '100%', height: '280px', }} src={news3} alt="Banner" />
                                         </Grid>
                                         <Grid sx={{ marginTop: '-80px' }}>
-                                            <Typography sx={{ fontSize: '18px', color: '#291F78', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
+                                            <Typography sx={{ fontSize: '18px', color: 'black', fontWeight: '600', letterSpacing: '5px', padding: '0px 30px' }}>
                                                 HOW TO TURN REVIEWS INTO REVENUE:
                                                 MAKING THE MOST OF POSITIVE CUSTOMER FEEDBACK.
                                             </Typography>
@@ -320,7 +321,7 @@ const News = () => {
                                                         container
                                                         spacing={4}
                                                     >
-                                                        <Grid item md={10}>
+                                                        <Grid item md={12}>
                                                             <Grid sx={{ padding: '20px 20px 20px 20px', marginBottom: '20px' }}>
                                                                 <Grid sx={{ border: '1px solid gray', borderRadius: '10px', boxShadow: '2' }}>
                                                                     <Grid sx={{ padding: '10px !important' }}>
@@ -334,7 +335,7 @@ const News = () => {
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Grid item md={2}></Grid>
+                                                        <Grid item md={0}></Grid>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -342,8 +343,8 @@ const News = () => {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item md={4}>
-                                <Grid>
+                            <Grid item md={0}>
+                                {/* <Grid>
                                     <Grid>
                                         <Typography sx={{ fontSize: '25px', fontWeight: '600' }}>
                                             SEARCH
@@ -540,7 +541,7 @@ const News = () => {
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </Grid>
                     </Container>

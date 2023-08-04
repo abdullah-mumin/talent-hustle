@@ -1,5 +1,5 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import login from '../../Images/Login/login.png';
 import Loader from '../../Component/Loader/Loader';
+import Message from '../../Component/Message/Message';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,6 +19,32 @@ const Login = () => {
         // console.log(id);
     };
 
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (userData) {
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setUserData(updateInfo || []);
+            }
+        }, 200)
+        return () => clearInterval(interval);
+    }, [userData]);
+
+
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+    // const [candidate, setCandidate] = useState('');
+    const handleClose = () => {
+        setOpen(false);
+        navigate(`/home`);
+    };
+    // console.log(flag)
+
+    const handleOpen = () => {
+        setOpen(true);
+        setTimeout(() => handleClose(), 3000);
+    };
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const info = {
@@ -27,7 +54,7 @@ const Login = () => {
         };
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/login`, {
+            const response = await fetch(`https://talent-hustle-server.vercel.app/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -37,11 +64,25 @@ const Login = () => {
 
             const result = await response.json();
             setLoading(true);
-            // console.log(result.message);
+            // console.log(result);
             if (result.message === 'Login Successful') {
-                localStorage.setItem('userData', JSON.stringify(result.data));
+                // setCandidate(result?.data?.isCandidate);
+                localStorage.setItem('userInfo', JSON.stringify(result.data));
+                const addonMessage = {
+                    message: 'Successfully Login'
+                };
+                setMessage(addonMessage);
+                handleOpen();
                 setLoading(false);
-                navigate(`/home`);
+            }
+            else if (result.message === 'Login Failed') {
+                // setCandidate(result?.data?.isCandidate);
+                const addonMessage = {
+                    message: 'Login Failed!!! Try Again...'
+                };
+                setMessage(addonMessage);
+                handleOpen();
+                setLoading(false);
             }
         } catch (error) {
             console.error("Error:", error);
@@ -73,7 +114,7 @@ const Login = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid sx={{ textAlign: 'center' }}>
-                                            <img style={{ width: '80%', height: '280px', }} src={login} alt="Banner" />
+                                            <img style={{ width: '80%', height: '205px', }} src={login} alt="Banner" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -112,7 +153,7 @@ const Login = () => {
                                         </Grid>
                                         <Grid sx={{ textAlign: 'center' }}>
                                             <Typography sx={{ fontSize: '20px', fontWeight: '600', color: '#291F78' }}>
-                                                Existing User Login Below
+                                                Existing User
                                             </Typography>
                                             <Grid>
                                                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -146,14 +187,14 @@ const Login = () => {
                                                     </Button>
                                                 </form>
                                             </Grid>
-                                            <Grid>
+                                            {/* <Grid>
                                                 <Button
                                                     sx={{ width: '50%', textAlign: 'center', marginTop: '30px', paddingTop: '10px', paddingBottom: '10px', marginRight: '10px', marginLeft: '10px' }}
                                                     variant="contained"
                                                     type="submit" >
                                                     Login with Google
                                                 </Button>
-                                            </Grid>
+                                            </Grid> */}
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -163,6 +204,9 @@ const Login = () => {
                 </Grid >
             </Grid >
             <Footer />
+            {
+                open && <Message open={open} onclose={handleClose} message={message} />
+            }
         </>
     );
 };

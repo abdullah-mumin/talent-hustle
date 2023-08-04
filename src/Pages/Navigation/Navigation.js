@@ -6,10 +6,11 @@ import NavDrawer from '../Navigation/Drawer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../Images/home/logo.jpg'
+import logo from '../../Images/home/logo.png'
 import Person from "@mui/icons-material/Person";
 import Logout from "@mui/icons-material/Logout";
 import Loader from '../../Component/Loader/Loader';
+import Message from '../../Component/Message/Message';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,57 +20,61 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         flexGrow: '1',
-        marginTop: '8px'
+        marginTop: '-5px'
     },
     link: {
         textDecoration: 'none',
         marginTop: '-5px',
         color: 'black',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link1: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '-5px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link4: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '-5px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link5: {
         textDecoration: 'none',
-        marginTop: '10px',
+        marginTop: '-5px',
         color: 'black',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+        fontSize: '25px',
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
+        fontWeight: '600'
     },
     link7: {
         textDecoration: 'none',
         color: 'black',
         marginTop: '10px',
-        fontWeight: 700,
+        fontWeight: 600,
         paddingRight: '20px',
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
@@ -78,9 +83,9 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'black',
         marginTop: '10px',
-        fontWeight: 700,
-        fontSize: '20px',
-        marginLeft: theme.spacing(2),
+        fontWeight: 600,
+        fontSize: '24px',
+        marginLeft: theme.spacing(3),
         '&:hover': {
             color: 'red',
         },
@@ -105,23 +110,40 @@ const Navigation = () => {
         setAnchorEl(null);
     };
 
+    const [message, setMessage] = useState('');
+    const [messageOpen, setMessageOpen] = useState(false);
+    const handleMessageClose = () => {
+        setMessageOpen(false);
+        navigate(`/home`);
+    };
+
+    const handleMessageOpen = () => {
+        setMessageOpen(true);
+        setTimeout(() => handleMessageClose(), 3000);
+    };
+
     const logoutUser = () => {
         setLoading(true);
-        localStorage.removeItem('userData');
+        localStorage.removeItem('userInfo');
+        const addonMessage = {
+            message: 'Successfully Logout'
+        };
+        setMessage(addonMessage);
+        handleMessageOpen();
         setLoading(false);
     };
 
     const handleLogoutUser = () => {
         logoutUser();
-        navigate('/');
-        window.location.reload();
+        // navigate('/');
+        // window.location.reload();
     }
 
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         let interval = setInterval(() => {
             if (userData) {
-                const updateInfo = JSON.parse(localStorage.getItem('userData'));
+                const updateInfo = JSON.parse(localStorage.getItem('userInfo'));
                 setUserData(updateInfo || []);
             }
         }, 200)
@@ -134,6 +156,9 @@ const Navigation = () => {
     const handleProfile = () => {
         navigate('/profile');
     };
+    const handleDashboard = () => {
+        navigate('/company-dashboard');
+    };
 
 
 
@@ -144,7 +169,7 @@ const Navigation = () => {
                 <CssBaseline>
                     <Toolbar>
                         <Link to='/' className={classes.logo}>
-                            <img style={{ width: '100px', height: '50px', marginLeft: '20px' }} src={logo} alt="Trektil" />
+                            <img style={{ width: '100px', height: '80px', marginLeft: '20px' }} src={logo} alt="Trektil" />
                         </Link>
 
                         {isMobile ? (
@@ -161,19 +186,19 @@ const Navigation = () => {
                                     {/* <NavLink to='/tour-plan' style={{ textDecoration: 'none' }} className={classes.link1}>
                                                     {t('nOption1')}
                                                 </NavLink> */}
-                                    <NavLink to='/' style={{ textDecoration: 'none' }} className={classes.link}>
+                                    <NavLink to='/' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link}>
                                         HOME
                                     </NavLink>
-                                    <NavLink to='/about' style={{ textDecoration: 'none' }} className={classes.link}>
+                                    <NavLink to='/about' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link}>
                                         ABOUT
                                     </NavLink>
                                     {/* <NavLink to='/jobs' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         JOBS
                                     </NavLink> */}
-                                    <NavLink to='/news' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    {/* <NavLink to='/news' style={{ textDecoration: 'none' }} className={classes.link4}>
                                         NEWS
-                                    </NavLink>
-                                    <NavLink to='/contact' style={{ textDecoration: 'none' }} className={classes.link4}>
+                                    </NavLink> */}
+                                    <NavLink to='/contact' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link4}>
                                         CONTACT
                                     </NavLink>
                                 </Grid>
@@ -355,7 +380,7 @@ const Navigation = () => {
                                                                 anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
                                                             >
                                                                 <MenuItem
-                                                                    // onClick={handleProfile}
+                                                                    onClick={handleDashboard}
                                                                     sx={{
                                                                         '&.hover': {
                                                                             backgroundColor: 'red'
@@ -400,10 +425,10 @@ const Navigation = () => {
                                             </>
                                             :
                                             <>
-                                                <NavLink to='/login' style={{ textDecoration: 'none' }} className={classes.link5}>
+                                                <NavLink to='/login' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link5}>
                                                     Login
                                                 </NavLink>
-                                                <NavLink to='/register' style={{ textDecoration: 'none' }} className={classes.link5}>
+                                                <NavLink to='/register' style={{ textDecoration: 'none', fontFamily: 'serif' }} className={classes.link5}>
                                                     Register
                                                 </NavLink>
                                             </>
@@ -414,6 +439,9 @@ const Navigation = () => {
                     </Toolbar>
                 </CssBaseline>
             </AppBar>
+            {
+                messageOpen && <Message open={messageOpen} onclose={handleMessageClose} message={message} />
+            }
         </>
     );
 };
